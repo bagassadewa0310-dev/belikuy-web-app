@@ -903,3 +903,106 @@ document.addEventListener('DOMContentLoaded', () => {
   renderUserProfile();
   updateCartBadge();
 });
+// =========================================================
+// LOGIKA FITUR PROFIL USER, LOGIN & LOGOUT (OTOMATIS)
+// =========================================================
+
+(function () {
+  // Data User Default
+  const defaultUserData = {
+    isLoggedIn: true,
+    nama: "Budi Santoso",
+    email: "budi.santoso@gmail.com",
+    noHP: "0812-3456-7890",
+    alamat: "Jl. Jendral Sudirman No. 45, Jakarta"
+  };
+
+  // Inisialisasi Data ke LocalStorage jika belum ada
+  if (!localStorage.getItem('belikuy_user')) {
+    localStorage.setItem('belikuy_user', JSON.stringify(defaultUserData));
+  }
+
+  // Fungsi Render Tampilan Profil di Top Bar / Header
+  window.renderProfileHeader = function () {
+    const userSection = document.getElementById('userProfileSection');
+    if (!userSection) return;
+
+    const user = JSON.parse(localStorage.getItem('belikuy_user'));
+
+    if (user && user.isLoggedIn) {
+      userSection.innerHTML = `
+        <button onclick="openProfileDetailModal()" class="flex items-center gap-2 bg-red-700/50 hover:bg-red-700 p-1.5 px-3 rounded-full transition border border-red-400/30">
+          <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(user.nama)}&background=ffffff&color=dc2626" class="w-6 h-6 rounded-full font-bold">
+          <span class="text-xs font-bold hidden sm:inline truncate max-w-[100px]">${user.nama}</span>
+          <i class="fa-solid fa-chevron-down text-[10px] opacity-80"></i>
+        </button>
+      `;
+    } else {
+      userSection.innerHTML = `
+        <button onclick="openLoginModal()" class="bg-white text-red-600 hover:bg-yellow-300 hover:text-red-900 font-extrabold text-xs px-3 py-1.5 rounded-xl shadow transition flex items-center gap-1.5">
+          <i class="fa-solid fa-right-to-bracket"></i> Masuk
+        </button>
+      `;
+    }
+  };
+
+  // Fungsi Buka Modal Detail Profil
+  window.openProfileDetailModal = function () {
+    const user = JSON.parse(localStorage.getItem('belikuy_user'));
+    if (!user) return;
+
+    document.getElementById('userModalName').innerText = user.nama;
+    document.getElementById('userModalEmail').innerText = user.email;
+    document.getElementById('userModalPhone').innerText = user.noHP;
+    document.getElementById('userModalAddress').innerText = user.alamat;
+    document.getElementById('userModalAvatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.nama)}&background=dc2626&color=fff`;
+
+    document.getElementById('profileDetailModal').classList.remove('hidden');
+  };
+
+  // Fungsi Buka Modal Login
+  window.openLoginModal = function () {
+    document.getElementById('loginModal').classList.remove('hidden');
+  };
+
+  // Fungsi Tutup Custom Modal
+  window.closeModalCustom = function (modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+  };
+
+  // Fungsi Handle Login Submit
+  window.handleUserLogin = function (event) {
+    event.preventDefault();
+    const email = document.getElementById('loginEmailInput').value;
+    const nameFromEmail = email.split('@')[0].replace('.', ' ');
+
+    const updatedUser = {
+      isLoggedIn: true,
+      nama: nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1),
+      email: email,
+      noHP: "0812-9876-5432",
+      alamat: "Jl. Gatot Subroto No. 88, Jakarta"
+    };
+
+    localStorage.setItem('belikuy_user', JSON.stringify(updatedUser));
+    window.closeModalCustom('loginModal');
+    window.renderProfileHeader();
+    alert(`Selamat datang kembali, ${updatedUser.nama}!`);
+  };
+
+  // Fungsi Handle Logout
+  window.handleUserLogout = function () {
+    const user = JSON.parse(localStorage.getItem('belikuy_user'));
+    user.isLoggedIn = false;
+    localStorage.setItem('belikuy_user', JSON.stringify(user));
+
+    window.closeModalCustom('profileDetailModal');
+    window.renderProfileHeader();
+    alert("Anda telah berhasil keluar dari akun BeliKuy.");
+  };
+
+  // Auto Render saat Halaman Selesai di-load
+  document.addEventListener("DOMContentLoaded", function () {
+    window.renderProfileHeader();
+  });
+})();
