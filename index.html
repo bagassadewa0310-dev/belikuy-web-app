@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeliKuy - Toko Online Terpercaya</title>
+  <!-- Tailwind CSS & FontAwesome Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased pb-20">
+
+  <!-- TOP HEADER -->
+  <header class="bg-red-600 text-white sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 text-[11px] py-1.5 flex justify-between items-center border-b border-red-500/50 hidden md:flex">
+      <div class="flex gap-4">
+        <a href="#" class="hover:opacity-80">Seller Centre</a><span>|</span>
+        <a href="#" class="hover:opacity-80">Mulai Berjualan</a><span>|</span>
+        <a href="#" class="hover:opacity-80">Download App</a>
+      </div>
+      <div class="flex gap-4 items-center">
+        <a href="#" class="hover:opacity-80 flex items-center gap-1"><i class="fa-regular fa-bell"></i> Notifikasi</a>
+        <a href="#" class="hover:opacity-80 flex items-center gap-1"><i class="fa-regular fa-circle-question"></i> Bantuan</a>
+      </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between gap-4 sm:gap-8">
+        <a href="#" onclick="resetToHome()" class="flex items-center gap-2 text-white font-black text-2xl tracking-wider shrink-0">
+          <div class="w-10 h-10 bg-white text-red-600 rounded-2xl flex items-center justify-center font-black text-2xl shadow">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <span>Beli<span class="text-yellow-300">Kuy</span></span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="flex-1 max-w-2xl">
+          <div class="relative flex items-center">
+            <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Cari Samsung, iPhone, ROG Phone, MacBook, Monitor..." class="w-full bg-white text-slate-800 rounded-lg py-2.5 pl-4 pr-12 text-xs font-semibold focus:outline-none shadow-inner" />
+            <button class="absolute right-1 bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-md text-xs font-bold">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+          <div class="flex gap-3 text-[10px] text-red-100 mt-1 overflow-x-auto scrollbar-hide hidden sm:flex">
+            <a href="#" onclick="quickSearch('iPhone 16')" class="hover:underline">iPhone 16</a>
+            <a href="#" onclick="quickSearch('ROG Phone')" class="hover:underline">ROG Phone 9</a>
+            <a href="#" onclick="quickSearch('MacBook')" class="hover:underline">MacBook M4</a>
+            <a href="#" onclick="quickSearch('Galaxy Watch')" class="hover:underline">Galaxy Watch7</a>
+            <a href="#" onclick="quickSearch('Epson')" class="hover:underline">Epson EcoTank</a>
+          </div>
+        </div>
+
+        <!-- Icons -->
+        <div class="flex items-center gap-4 text-white">
+          <button onclick="toggleWishlistModal()" class="relative p-2 hover:opacity-80">
+            <i class="fa-regular fa-heart text-2xl"></i>
+          </button>
+          <button onclick="toggleCartModal()" class="relative p-2 hover:opacity-80">
+            <i class="fa-solid fa-cart-shopping text-2xl"></i>
+            <span id="cartBadge" class="absolute top-0 right-0 bg-yellow-400 text-red-900 text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-red-600">0</span>
+          </button>
+          <div id="userProfileSection"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-2 sm:px-4 py-4 space-y-4">
+
+    <!-- HERO BANNER -->
+    <div class="bg-gradient-to-r from-red-600 via-orange-500 to-amber-500 rounded-2xl p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-3 text-center md:text-left">
+        <span id="bannerTag" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md inline-block">Promo Spesial BeliKuy</span>
+        <h1 id="bannerTitle" class="text-2xl sm:text-3xl font-extrabold">Katalog Produk Terlengkap & Terbaru</h1>
+        <p id="bannerDesc" class="text-xs sm:text-sm text-red-100 max-w-md">Diskon melimpah, Garansi Resmi, Gratis Ongkir ke seluruh Indonesia!</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&auto=format&fit=crop&q=80" class="w-64 h-36 object-cover rounded-xl shadow-2xl border-4 border-white/20">
+    </div>
+
+    <!-- QUICK MENU FEATURES -->
+    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+      <div class="grid grid-cols-4 sm:grid-cols-7 gap-3 text-center">
+        <button onclick="filterByFeature('pilih_lokal')" class="flex flex-col items-center gap-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center text-xl shadow-sm group-hover:bg-red-600 group-hover:text-white transition">
+            <i class="fa-solid fa-shop"></i>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Pilih Lokal</span>
+        </button>
+        <button onclick="filterByFeature('belikuy_mall')" class="flex flex-col items-center gap-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl shadow-sm group-hover:bg-blue-600 group-hover:text-white transition">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">BeliKuy Mall</span>
+        </button>
+        <button onclick="filterByFeature('pulsa')" class="flex flex-col items-center gap-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl shadow-sm group-hover:bg-teal-600 group-hover:text-white transition">
+            <i class="fa-solid fa-mobile-screen"></i>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Pulsa & Paket</span>
+        </button>
+        <button onclick="filterByFeature('flash_sale')" class="flex flex-col items-center gap-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl shadow-sm group-hover:bg-amber-600 group-hover:text-white transition">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Flash Sale</span>
+        </button>
+        <button onclick="filterByFeature('supermarket')" class="flex flex-col items-center gap-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shadow-sm group-hover:bg-emerald-600 group-hover:text-white transition">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Supermarket</span>
+        </button>
+        <button onclick="filterByFeature('dikelola')" class="flex flex-col items-center gap-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl shadow-sm group-hover:bg-purple-600 group-hover:text-white transition">
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Dikelola BeliKuy</span>
+        </button>
+        <button onclick="filterByFeature('diskon25')" class="flex flex-col items-center gap-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl shadow-sm group-hover:bg-pink-600 group-hover:text-white transition">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Diskon 25%</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- KATEGORI BARANG -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-3">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h2 class="text-sm font-extrabold text-slate-800 tracking-wider uppercase">Kategori Pilihan</h2>
+        <button onclick="setCategory('ALL')" class="text-xs text-red-600 font-bold hover:underline">Lihat Semua Kategori</button>
+      </div>
+      <div id="categoryGrid" class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-5 gap-2">
+        <!-- Render Otomatis via JS -->
+      </div>
+    </div>
+
+    <!-- REKOMENDASI PRODUK GRID -->
+    <div class="space-y-3 pt-2">
+      <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-200">
+        <h3 class="font-extrabold text-sm text-red-600 uppercase tracking-wide flex items-center gap-2">
+          <i class="fa-solid fa-fire text-orange-500"></i> <span id="sectionTitle">Daftar Produk</span>
+        </h3>
+        <span id="categoryStatusText" class="text-xs font-bold text-slate-500">Semua Produk</span>
+      </div>
+      <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
+    </div>
+  </main>
+
+  <!-- MODAL DETAIL PRODUK -->
+  <div id="productDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative p-5 space-y-4">
+      <button onclick="closeProductDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <div class="text-[11px] text-slate-400 font-semibold space-x-1">
+        <span id="modalBreadcrumbCat">Kategori</span><span>/</span><span id="modalBreadcrumbName" class="text-slate-600 truncate">Nama Produk</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="w-full h-56 sm:h-64 bg-slate-100 rounded-xl overflow-hidden border border-slate-200">
+          <img id="detailMainImg" src="" class="w-full h-full object-cover">
+        </div>
+        <div class="space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <h2 id="detailTitle" class="font-extrabold text-base text-slate-900 leading-snug"></h2>
+            <div class="flex items-center gap-3 text-xs">
+              <div class="flex items-center gap-1 font-bold text-amber-500"><i class="fa-solid fa-star"></i><span id="detailRating">5.0</span></div>
+              <span class="text-slate-300">|</span><span class="text-slate-500"><b id="detailPenilaian">0</b> Penilaian</span>
+              <span class="text-slate-300">|</span><span class="text-slate-500"><b id="detailTerjual">0</b> Terjual</span>
+            </div>
+            <div class="bg-red-50 p-3 rounded-xl border border-red-100 flex items-baseline gap-2">
+              <span id="detailPrice" class="text-xl font-black text-red-600">Rp0</span>
+              <span id="detailOriginalPrice" class="text-xs text-slate-400 line-through"></span>
+              <span id="detailDiscountBadge" class="text-[10px] bg-red-100 text-red-600 font-bold px-1.5 py-0.5 rounded"></span>
+            </div>
+            <div class="flex items-center gap-3 pt-2">
+              <span class="text-xs font-bold text-slate-600">Jumlah:</span>
+              <div class="flex items-center border border-slate-300 rounded-lg overflow-hidden text-xs">
+                <button onclick="changeDetailQty(-1)" class="px-2.5 py-1 bg-slate-100 font-bold">-</button>
+                <input id="detailQtyInput" type="text" value="1" readonly class="w-10 text-center font-bold bg-transparent text-xs">
+                <button onclick="changeDetailQty(1)" class="px-2.5 py-1 bg-slate-100 font-bold">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 flex items-center gap-2">
+            <button onclick="toggleWishlistFromDetail()" class="p-2.5 border border-slate-300 rounded-xl hover:bg-slate-50 text-xs font-bold text-slate-700 flex items-center gap-1">
+              <i id="detailHeartIcon" class="fa-regular fa-heart"></i><span id="detailFavoritText">Favorit</span>
+            </button>
+            <button onclick="addDetailToCart()" class="flex-1 bg-red-100 text-red-600 border border-red-200 hover:bg-red-200 py-2.5 rounded-xl font-bold text-xs">+ Keranjang</button>
+            <button onclick="buyNowFromDetail()" class="flex-1 bg-red-600 text-white hover:bg-red-700 py-2.5 rounded-xl font-bold text-xs shadow-md">Beli Sekarang</button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-slate-200 pt-3 space-y-2 text-xs">
+        <div class="flex items-center gap-3">
+          <img id="storeLogo" src="" class="w-8 h-8 rounded-full border border-slate-200 object-cover">
+          <div><h4 id="storeName" class="font-bold text-slate-800"></h4><span class="text-[10px] text-green-600 font-bold">● Online</span></div>
+        </div>
+        <p id="detailDescription" class="text-slate-600 leading-relaxed pt-1"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CART -->
+  <div id="cartModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex justify-end hidden">
+    <div class="bg-white max-w-md w-full h-full shadow-2xl flex flex-col justify-between p-4 sm:p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <h3 class="font-extrabold text-base text-slate-900 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-red-600"></i> Keranjang Belanja</h3>
+        <button onclick="toggleCartModal()" class="text-slate-400 hover:text-slate-800"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div id="cartItemsList" class="flex-1 overflow-y-auto space-y-3 pr-1"></div>
+      <div class="border-t border-slate-200 pt-3 space-y-3 bg-slate-50 p-4 rounded-xl">
+        <div class="space-y-1 text-xs">
+          <div class="flex justify-between text-slate-500"><span>Subtotal</span><span id="subtotalText" class="font-bold text-slate-800">Rp0</span></div>
+          <div class="flex justify-between text-slate-500"><span>Pengiriman</span><span id="ongkirText" class="font-bold text-slate-800">Rp0</span></div>
+          <div class="flex justify-between items-center text-sm font-black text-slate-900 pt-2 border-t border-slate-200"><span>Total Bayar</span><span id="totalPayText" class="text-red-600">Rp0</span></div>
+        </div>
+        <button onclick="openCheckoutModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl text-xs shadow-lg">Lanjut ke Pembayaran</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL WISHLIST -->
+  <div id="wishlistModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex justify-end hidden">
+    <div class="bg-white max-w-md w-full h-full shadow-2xl flex flex-col justify-between p-4 sm:p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <h3 class="font-extrabold text-base text-slate-900 flex items-center gap-2"><i class="fa-solid fa-heart text-red-500"></i> Wishlist Favorit</h3>
+        <button onclick="toggleWishlistModal()" class="text-slate-400 hover:text-slate-800"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div id="wishlistItemsList" class="flex-1 overflow-y-auto space-y-3 pr-1"></div>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKOUT -->
+  <div id="checkoutModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl relative">
+      <button onclick="toggleCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <h3 class="font-extrabold text-base text-slate-900 border-b border-slate-200 pb-2">Pengiriman & Pembayaran</h3>
+      <form onsubmit="processCheckoutOrder(event)" class="space-y-3 text-xs">
+        <div><label class="block font-bold text-slate-700 mb-1">Nama Penerima</label><input type="text" id="shipName" required value="Budi Santoso" class="w-full border border-slate-300 rounded-lg p-2 font-semibold"></div>
+        <div><label class="block font-bold text-slate-700 mb-1">Nomor Telepon</label><input type="tel" id="shipPhone" required value="081234567890" class="w-full border border-slate-300 rounded-lg p-2 font-semibold"></div>
+        <div><label class="block font-bold text-slate-700 mb-1">Alamat Lengkap</label><textarea id="shipAddress" required rows="2" class="w-full border border-slate-300 rounded-lg p-2 font-semibold">Jl. Jendral Sudirman No. 45, Jakarta</textarea></div>
+        <div><label class="block font-bold text-slate-700 mb-1">Metode Pembayaran</label><select id="paymentMethod" class="w-full border border-slate-300 rounded-lg p-2 font-semibold"><option>Transfer Bank (BCA / Mandiri)</option><option>E-Wallet (Gopay / ShopeePay)</option><option>COD (Bayar di Tempat)</option></select></div>
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center">
+          <div><span class="text-[10px] text-slate-400">Total Pembayaran</span><div id="checkoutTotalPay" class="font-black text-red-600 text-sm">Rp0</div></div>
+          <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-extrabold px-5 py-2.5 rounded-xl shadow">Buat Pesanan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
