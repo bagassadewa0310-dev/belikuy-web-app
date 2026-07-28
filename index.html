@@ -253,7 +253,98 @@
       </form>
     </div>
   </div>
+<!-- ========================================================= -->
+<!-- TAMBAHAN FITUR: MODAL DETAIL PROFIL USER, LOGIN & LOGOUT  -->
+<!-- ========================================================= -->
 
+<!-- MODAL LOGIN USER -->
+<div id="loginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[999] flex items-center justify-center p-4 hidden">
+  <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4 text-center">
+    <button onclick="closeModalCustom('loginModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800">
+      <i class="fa-solid fa-xmark text-lg"></i>
+    </button>
+    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-xl font-bold mx-auto">
+      <i class="fa-solid fa-user-lock"></i>
+    </div>
+    <h3 class="text-lg font-black text-slate-800">Masuk ke BeliKuy</h3>
+    <form onsubmit="handleUserLogin(event)" class="space-y-3 text-left text-xs">
+      <div>
+        <label class="block font-bold text-slate-700 mb-1">Email / Gmail</label>
+        <input type="email" id="loginEmailInput" placeholder="contoh: budi@gmail.com" required class="w-full border border-slate-300 rounded-xl p-2.5 font-semibold focus:outline-none focus:ring-2 focus:ring-red-500">
+      </div>
+      <div>
+        <label class="block font-bold text-slate-700 mb-1">Password</label>
+        <input type="password" id="loginPasswordInput" placeholder="••••••••" required class="w-full border border-slate-300 rounded-xl p-2.5 font-semibold focus:outline-none focus:ring-2 focus:ring-red-500">
+      </div>
+      <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-3 rounded-xl shadow-md transition">
+        Masuk Akun
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL DETAIL PROFIL USER -->
+<div id="profileDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[999] flex items-center justify-center p-4 hidden">
+  <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-5 text-slate-800">
+    <button onclick="closeModalCustom('profileDetailModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800">
+      <i class="fa-solid fa-xmark text-lg"></i>
+    </button>
+    
+    <!-- Info Header Profil -->
+    <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+      <img id="userModalAvatar" src="https://ui-avatars.com/api/?name=Budi+Santoso&background=dc2626&color=fff" class="w-16 h-16 rounded-full border-2 border-red-500 shadow-sm object-cover">
+      <div>
+        <div class="flex items-center gap-2">
+          <h3 id="userModalName" class="font-extrabold text-base text-slate-900">Budi Santoso</h3>
+          <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded-full border border-amber-300">Member Gold</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-shield-halved text-green-500"></i> Akun Terverifikasi</p>
+      </div>
+    </div>
+
+    <!-- Detail Data Informasi User -->
+    <div class="space-y-3 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+      <div class="flex items-start gap-3">
+        <i class="fa-solid fa-envelope text-slate-400 mt-0.5 text-sm"></i>
+        <div>
+          <span class="block text-[10px] text-slate-400 font-bold uppercase">Email / Gmail</span>
+          <span id="userModalEmail" class="font-bold text-slate-800">budi.santoso@gmail.com</span>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <i class="fa-solid fa-phone text-slate-400 mt-0.5 text-sm"></i>
+        <div>
+          <span class="block text-[10px] text-slate-400 font-bold uppercase">Nomor HP / WhatsApp</span>
+          <span id="userModalPhone" class="font-bold text-slate-800">0812-3456-7890</span>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <i class="fa-solid fa-location-dot text-slate-400 mt-0.5 text-sm"></i>
+        <div>
+          <span class="block text-[10px] text-slate-400 font-bold uppercase">Alamat Utama Pengiriman</span>
+          <span id="userModalAddress" class="font-bold text-slate-800 leading-tight block">Jl. Jendral Sudirman No. 45, Jakarta</span>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <i class="fa-solid fa-calendar-check text-slate-400 mt-0.5 text-sm"></i>
+        <div>
+          <span class="block text-[10px] text-slate-400 font-bold uppercase">Tanggal Bergabung</span>
+          <span class="font-bold text-slate-800">12 Januari 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tombol Aksi -->
+    <div class="flex gap-3 pt-1">
+      <button onclick="handleUserLogout()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+        <i class="fa-solid fa-right-from-bracket"></i> Keluar (Logout)
+      </button>
+      <button onclick="closeModalCustom('profileDetailModal')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition">
+        Tutup
+      </button>
+    </div>
+  </div>
+</div>
   <script src="app.js"></script>
   <!-- Footer Component by Deni -->
 <footer style="background: #1e293b; color: white; text-align: center; padding: 20px; margin-top: 40px;">
