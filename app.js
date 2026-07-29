@@ -1077,3 +1077,34 @@ window.buyNowFromDetail = function() {
     openCheckoutModal();
   }
 };
+// Fungsi Pilih Warna
+window.selectColor = function(btn) {
+  const container = document.getElementById('colorOptions');
+  if (!container) return;
+  
+  // Reset semua tombol warna ke tampilan default
+  const buttons = container.querySelectorAll('.color-btn');
+  buttons.forEach(b => {
+    b.className = "color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 font-medium px-3 py-1.5 rounded-lg text-[11px]";
+  });
+
+  // Set tombol yang diklik jadi aktif (merah + centang)
+  btn.className = "color-btn border-2 border-red-600 bg-red-50 text-red-600 font-bold px-3 py-1.5 rounded-lg text-[11px] flex items-center gap-1";
+  btn.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i> ${btn.innerText.trim()}`;
+};
+
+// Fungsi Ubah Kuantitas Modal Detail
+window.changeDetailQty = function(change) {
+  const input = document.getElementById('detailQtyInput');
+  if (!input) return;
+  let currentVal = parseInt(input.value) || 1;
+  currentVal += change;
+  if (currentVal < 1) currentVal = 1;
+  input.value = currentVal;
+};
+
+// Fungsi Tutup Modal Detail
+window.closeProductDetailModal = function() {
+  const modal = document.getElementById('productDetailModal');
+  if (modal) modal.classList.add('hidden');
+};
