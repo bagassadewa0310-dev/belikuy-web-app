@@ -1062,3 +1062,60 @@ window.closeProductDetailModal = function() {
     modal.classList.add('hidden');
   }
 };
+// ===================================================
+// LOGIKA INTERAKTIF MODAL DETAIL PRODUK (BELIKUY)
+// ===================================================
+
+// 1. FUNGSI PILIH WARNA (Berpindah highlight & ikon centang)
+window.selectColor = function(element) {
+  const buttons = document.querySelectorAll('#colorOptions .color-btn');
+  buttons.forEach(btn => {
+    btn.className = "color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-bold text-[11px]";
+    const checkIcon = btn.querySelector('.fa-check');
+    if (checkIcon) checkIcon.remove();
+  });
+
+  element.className = "color-btn border-2 border-red-600 bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1";
+  element.insertAdjacentHTML('afterbegin', '<i class="fa-solid fa-check text-[10px]"></i> ');
+};
+
+// 2. FUNGSI UBAH KUANTITAS (+ / -)
+window.changeDetailQty = function(change) {
+  const qtyInput = document.getElementById('detailQtyInput');
+  if (!qtyInput) return;
+  let currentQty = parseInt(qtyInput.value) || 1;
+  currentQty += change;
+  if (currentQty < 1) currentQty = 1;
+  qtyInput.value = currentQty;
+};
+
+// 3. FUNGSI MASUKKAN KE KERANJANG FROM MODAL
+window.addDetailToCart = function() {
+  const title = document.getElementById('detailTitle')?.innerText || 'Produk';
+  const qtyInput = document.getElementById('detailQtyInput');
+  const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+
+  // Jika ada fungsi addToCart bawaan app.js kamu, panggil kodenya
+  if (typeof currentModalProduct !== 'undefined' && currentModalProduct && typeof addToCart === 'function') {
+    for (let i = 0; i < qty; i++) {
+      addToCart(currentModalProduct.id);
+    }
+  }
+
+  alert(`Berhasil menambahkan ${qty}x "${title}" ke dalam keranjang!`);
+  if (typeof closeProductDetailModal === 'function') closeProductDetailModal();
+};
+
+// 4. FUNGSI BELI SEKARANG (LANGSUNG KE METODE PEMBAYARAN & ALAMAT)
+window.buyNowFromDetail = function() {
+  // Masukkan dulu produk ke keranjang
+  addDetailToCart();
+
+  // Buka Modal Checkout / Pembayaran
+  const checkoutModal = document.getElementById('checkoutModal') || document.getElementById('cartModal');
+  if (checkoutModal) {
+    checkoutModal.classList.remove('hidden');
+  } else if (typeof openCheckoutModal === 'function') {
+    openCheckoutModal();
+  }
+};
