@@ -1,7 +1,7 @@
 // ==========================================
 // DATA PRODUK (DESAIN SAMAKAN DENGAN GAMBAR BELIKUY)
 // ==========================================
-const products = [
+let products = [
   // ---------------- LAPTOP ----------------
   {
     id: "lt1",
@@ -93,141 +93,6 @@ const products = [
     store: { name: "Acer Official Store", logo: "" },
     description: "Inovasi pendinginan maksimal dan grafis RTX kelas atas untuk pengalaman eSports murni."
   },
-  {
-    id: "lt7",
-    name: "Acer Nitro V 15",
-    category: "laptop",
-    price: 10999000,
-    originalPrice: 11999000,
-    rating: 4.8,
-    penilaian: 3100,
-    terjual: "5RB+",
-    isMall: true,
-    sizes: ["i5 / 8GB / 512GB", "i5 / 16GB / 512GB"],
-    images: ["https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Acer Official Store", logo: "" },
-    description: "Pilihan laptop gaming bernilai paling worth-it untuk gamers kasual dan mahasiswa."
-  },
-  {
-    id: "lt8",
-    name: "Acer Swift Go 14",
-    category: "laptop",
-    price: 13499000,
-    originalPrice: 14499000,
-    rating: 4.8,
-    penilaian: 620,
-    terjual: "1.5RB",
-    isMall: true,
-    sizes: ["OLED / 16GB / 512GB"],
-    images: ["https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Acer Official Store", logo: "" },
-    description: "Ringan, bertenaga, dan berlayar jernih. Partner mobilitas tinggi paling pas."
-  },
-  {
-    id: "lt9",
-    name: "Acer Aspire 5",
-    category: "laptop",
-    price: 6899000,
-    originalPrice: 7499000,
-    rating: 4.7,
-    penilaian: 4100,
-    terjual: "8RB+",
-    isMall: false,
-    sizes: ["8GB / 512GB SSD"],
-    images: ["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Acer Center", logo: "" },
-    description: "Solusi laptop terjangkau dengan spesifikasi tangguh untuk kebutuhan harian."
-  },
-  {
-    id: "lt10",
-    name: "Acer TravelMate P2",
-    category: "laptop",
-    price: 8499000,
-    originalPrice: 9299000,
-    rating: 4.6,
-    penilaian: 290,
-    terjual: "600+",
-    isMall: true,
-    sizes: ["Core i5 / 8GB / 512GB"],
-    images: ["https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Acer Business Store", logo: "" },
-    description: "Laptop komersial tangguh yang dirancang untuk mendukung kerja kantoran yang efisien."
-  },
-  {
-    id: "lt11",
-    name: "Lenovo Legion Pro 5",
-    category: "laptop",
-    price: 24999000,
-    originalPrice: 26999000,
-    rating: 4.9,
-    penilaian: 1580,
-    terjual: "2RB+",
-    isMall: true,
-    sizes: ["Ryzen 9 / 32GB / 1TB RTX4070"],
-    images: ["https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Lenovo Official Store", logo: "" },
-    description: "Performa kelas pro dengan sistem pendingin Legion Coldfront yang ikonik."
-  },
-  {
-    id: "lt12",
-    name: "Lenovo LOQ 15",
-    category: "laptop",
-    price: 12999000,
-    originalPrice: 13999000,
-    rating: 4.8,
-    penilaian: 2400,
-    terjual: "3.8RB",
-    isMall: true,
-    sizes: ["i5 / 12GB / 512GB RTX3050"],
-    images: ["https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Lenovo Official Store", logo: "" },
-    description: "Gerbang utama masuk ke dunia gaming AAA dengan dana yang bersahabat."
-  },
-  {
-    id: "lt13",
-    name: "Lenovo IdeaPad Slim 5",
-    category: "laptop",
-    price: 10499000,
-    originalPrice: 11299000,
-    rating: 4.8,
-    penilaian: 1900,
-    terjual: "3RB+",
-    isMall: true,
-    sizes: ["16GB / 512GB SSD"],
-    images: ["https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Lenovo Official Store", logo: "" },
-    description: "Desain fleksibel, tipis, dan baterai tahan lama untuk menunjang aktivitas padat."
-  },
-  {
-    id: "lt14",
-    name: "Lenovo Yoga Pro 7",
-    category: "laptop",
-    price: 18999000,
-    originalPrice: 20499000,
-    rating: 4.9,
-    penilaian: 510,
-    terjual: "750+",
-    isMall: true,
-    sizes: ["Touchscreen 3K / 16GB / 1TB"],
-    images: ["https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Lenovo Official Store", logo: "" },
-    description: "Kombinasi layar sentuh resolusi tinggi dan performa dapur pacu tanpa kompromi."
-  },
-  {
-    id: "lt15",
-    name: "Lenovo ThinkPad E14",
-    category: "laptop",
-    price: 11899000,
-    originalPrice: 12999000,
-    rating: 4.9,
-    penilaian: 1100,
-    terjual: "2.1RB",
-    isMall: true,
-    sizes: ["i5 / 16GB / 512GB"],
-    images: ["https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Lenovo Official Store", logo: "" },
-    description: "Keyboard terbaik kelas bisnis dengan ketahanan legendaris khas ThinkPad."
-  },
 
   // ---------------- HP (SMARTPHONE) ----------------
   {
@@ -246,66 +111,6 @@ const products = [
     description: "Flagship tercanggih dengan kamera 200MP, dukungan S-Pen built-in, serta Galaxy AI paling advance."
   },
   {
-    id: "hp2",
-    name: "Galaxy S25+",
-    category: "hp",
-    price: 16999000,
-    originalPrice: 18499000,
-    rating: 4.9,
-    penilaian: 1800,
-    terjual: "1.8RB",
-    isMall: true,
-    sizes: ["12/256GB", "12/512GB"],
-    images: ["https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Samsung Official Store", logo: "" },
-    description: "Layar QHD+ lebih lega dengan bodi ramping, ditenagai chip prosesor generasi terbaru."
-  },
-  {
-    id: "hp3",
-    name: "Galaxy S25",
-    category: "hp",
-    price: 13999000,
-    originalPrice: 14999000,
-    rating: 4.8,
-    penilaian: 2100,
-    terjual: "2.8RB",
-    isMall: true,
-    sizes: ["8/128GB", "8/256GB"],
-    images: ["https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Samsung Official Store", logo: "" },
-    description: "Ukurannya sangat nyaman di genggaman, namun menyimpan performa sekelas flagship murni."
-  },
-  {
-    id: "hp4",
-    name: "Galaxy A56",
-    category: "hp",
-    price: 6499000,
-    originalPrice: 6999000,
-    rating: 4.8,
-    penilaian: 5200,
-    terjual: "10RB+",
-    isMall: true,
-    sizes: ["8/256GB", "12/256GB"],
-    images: ["https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Samsung Official Store", logo: "" },
-    description: "Raja mid-range dengan perlindungan anti air IP67 dan jaminan update OS jangka panjang."
-  },
-  {
-    id: "hp5",
-    name: "Galaxy A36",
-    category: "hp",
-    price: 4499000,
-    originalPrice: 4899000,
-    rating: 4.7,
-    penilaian: 3800,
-    terjual: "7RB+",
-    isMall: true,
-    sizes: ["8/128GB", "8/256GB"],
-    images: ["https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Samsung Official Store", logo: "" },
-    description: "Layar Super AMOLED 120Hz yang sangat mulus dan baterai jumbo tahan lama."
-  },
-  {
     id: "hp6",
     name: "iPhone 16",
     category: "hp",
@@ -319,297 +124,35 @@ const products = [
     images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"],
     store: { name: "iBox Official Store", logo: "" },
     description: "Dilengkapi fitur Camera Control inovatif dan Chip A18 berarsitektur canggih."
-  },
-  {
-    id: "hp7",
-    name: "iPhone 16 Plus",
-    category: "hp",
-    price: 18499000,
-    originalPrice: 19999000,
-    rating: 4.9,
-    penilaian: 1400,
-    terjual: "1.9RB",
-    isMall: true,
-    sizes: ["128GB", "256GB", "512GB"],
-    images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "iBox Official Store", logo: "" },
-    description: "Layar Super Retina XDR 6,7 inci lebih puas dipadukan dengan daya tahan baterai luar biasa."
-  },
-  {
-    id: "hp8",
-    name: "iPhone 16 Pro",
-    category: "hp",
-    price: 20999000,
-    originalPrice: 22499000,
-    rating: 5.0,
-    penilaian: 2900,
-    terjual: "3.1RB",
-    isMall: true,
-    sizes: ["128GB", "256GB", "512GB", "1TB"],
-    images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "iBox Official Store", logo: "" },
-    description: "Desain titanium Pro ringan dan kokoh, perekaman video 4K 120 fps Dolby Vision kelas sinematik."
-  },
-  {
-    id: "hp9",
-    name: "iPhone 16 Pro Max",
-    category: "hp",
-    price: 24999000,
-    originalPrice: 26999000,
-    rating: 5.0,
-    penilaian: 5100,
-    terjual: "6.5RB",
-    isMall: true,
-    sizes: ["256GB", "512GB", "1TB"],
-    images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "iBox Official Store", logo: "" },
-    description: "Layar terbesar 6,9 inci, perfoma A18 Pro terhebat, dan zoom optik 5x super presisi."
-  },
-  {
-    id: "hp10",
-    name: "iPhone 16e",
-    category: "hp",
-    price: 12499000,
-    originalPrice: 13499000,
-    rating: 4.8,
-    penilaian: 920,
-    terjual: "1.5RB",
-    isMall: true,
-    sizes: ["128GB", "256GB"],
-    images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "iBox Official Store", logo: "" },
-    description: "Varian paling hemat dengan dapur pacu bertenaga untuk efisiensi sehari-hari."
-  },
-  {
-    id: "hp11",
-    name: "Xiaomi 15 Ultra",
-    category: "hp",
-    price: 19999000,
-    originalPrice: 21999000,
-    rating: 4.9,
-    penilaian: 880,
-    terjual: "1.2RB",
-    isMall: true,
-    sizes: ["16/512GB", "16/1TB"],
-    images: ["https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Xiaomi Official Store", logo: "" },
-    description: "Sistem kamera profesional hasil kolaborasi Leica dengan sensor raksasa 1 inci."
-  },
-  {
-    id: "hp12",
-    name: "Xiaomi 15",
-    category: "hp",
-    price: 11999000,
-    originalPrice: 12999000,
-    rating: 4.8,
-    penilaian: 1300,
-    terjual: "2.2RB",
-    isMall: true,
-    sizes: ["12/256GB", "12/512GB"],
-    images: ["https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Xiaomi Official Store", logo: "" },
-    description: "Flagship kompak berperforma gahar berkat dukungan chipset Snapdragon paling mutakhir."
-  },
-  {
-    id: "hp13",
-    name: "Redmi Note 14 Pro",
-    category: "hp",
-    price: 3999000,
-    originalPrice: 4399000,
-    rating: 4.8,
-    penilaian: 6200,
-    terjual: "12RB+",
-    isMall: true,
-    sizes: ["8/256GB", "12/512GB"],
-    images: ["https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Xiaomi Official Store", logo: "" },
-    description: "Kamera 200MP dengan OIS serta desain kurva bodi premium nan mewah."
-  },
-  {
-    id: "hp14",
-    name: "Redmi Note 14",
-    category: "hp",
-    price: 2499000,
-    originalPrice: 2799000,
-    rating: 4.7,
-    penilaian: 8900,
-    terjual: "20RB+",
-    isMall: true,
-    sizes: ["6/128GB", "8/256GB"],
-    images: ["https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Xiaomi Official Store", logo: "" },
-    description: "Smartphone harga merakyat dengan kejernihan layar AMOLED 120Hz."
-  },
-  {
-    id: "hp15",
-    name: "POCO X7 Pro",
-    category: "hp",
-    price: 4999000,
-    originalPrice: 5499000,
-    rating: 4.9,
-    penilaian: 4500,
-    terjual: "9RB+",
-    isMall: true,
-    sizes: ["12/512GB"],
-    images: ["https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "POCO Official Store", logo: "" },
-    description: "Extreme performance smartphone favorit para gamers kompetitif."
-  },
-
-  // ---------------- PC (DESKTOP) ----------------
-  {
-    id: "pc1",
-    name: "ASUS ROG G22CH",
-    category: "pc",
-    price: 31999000,
-    originalPrice: 34999000,
-    rating: 4.9,
-    penilaian: 320,
-    terjual: "450+",
-    isMall: true,
-    sizes: ["i7 / 32GB / 1TB / RTX4070"],
-    images: ["https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "ASUS Official Store", logo: "" },
-    description: "Desktop gaming ringkas berukuran 10L dengan performa setara rig berukuran penuh."
-  },
-  {
-    id: "pc2",
-    name: "ASUS ROG G16CH",
-    category: "pc",
-    price: 24999000,
-    originalPrice: 26999000,
-    rating: 4.8,
-    penilaian: 210,
-    terjual: "300+",
-    isMall: true,
-    sizes: ["i7 / 16GB / 1TB / RTX4060"],
-    images: ["https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "ASUS Official Store", logo: "" },
-    description: "Tower PC gaming berdesain futuristik dengan air-flow pendinginan optimal."
-  },
-  {
-    id: "pc3",
-    name: "ASUS ExpertCenter D7",
-    category: "pc",
-    price: 11499000,
-    originalPrice: 12499000,
-    rating: 4.7,
-    penilaian: 180,
-    terjual: "500+",
-    isMall: true,
-    sizes: ["i5 / 8GB / 512GB SSD"],
-    images: ["https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "ASUS Official Store", logo: "" },
-    description: "PC desktop enterprise berkinerja tinggi yang mudah di-upgrade untuk kebutuhan bisnis."
-  },
-  {
-    id: "pc4",
-    name: "MSI MAG Infinite S3",
-    category: "pc",
-    price: 18999000,
-    originalPrice: 20499000,
-    rating: 4.8,
-    penilaian: 340,
-    terjual: "600+",
-    isMall: true,
-    sizes: ["i5 / 16GB / 512GB / RTX4060"],
-    images: ["https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "MSI Official Store", logo: "" },
-    description: "Gaya RGB menarik dengan ventilasi udara besar untuk menjamin kestabilan gaming jam-jaman."
-  },
-  {
-    id: "pc5",
-    name: "Dell Alienware Aurora",
-    category: "pc",
-    price: 45999000,
-    originalPrice: 48999000,
-    rating: 5.0,
-    penilaian: 120,
-    terjual: "200+",
-    isMall: true,
-    sizes: ["i9 / 64GB / 2TB / RTX4090"],
-    images: ["https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Dell Official Store", logo: "" },
-    description: "Satu-satunya monster PC desktop gaming untuk kepuasan grafis rata kanan tanpa hambatan."
-  },
-
-  // ---------------- TV (SMART TV) ----------------
-  {
-    id: "tv1",
-    name: "Samsung Crystal UHD DU8000",
-    category: "tv",
-    price: 5899000,
-    originalPrice: 6499000,
-    rating: 4.8,
-    penilaian: 2300,
-    terjual: "4.1RB",
-    isMall: true,
-    sizes: ["43 Inci", "50 Inci", "55 Inci"],
-    images: ["https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Samsung Electronics", logo: "" },
-    description: "Warna krisp nan memukau dengan desain AirSlim yang amat tipis dan estetik."
-  },
-  {
-    id: "tv2",
-    name: "Samsung QLED Q70D",
-    category: "tv",
-    price: 10499000,
-    originalPrice: 11999000,
-    rating: 4.9,
-    penilaian: 890,
-    terjual: "1.5RB",
-    isMall: true,
-    sizes: ["55 Inci", "65 Inci"],
-    images: ["https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Samsung Electronics", logo: "" },
-    description: "Teknologi Motion Xcelerator 120Hz yang sangat pas dipadukan dengan konsol gaming."
-  },
-  {
-    id: "tv3",
-    name: "LG OLED C4",
-    category: "tv",
-    price: 21999000,
-    originalPrice: 24999000,
-    rating: 5.0,
-    penilaian: 740,
-    terjual: "950+",
-    isMall: true,
-    sizes: ["48 Inci", "55 Inci", "65 Inci"],
-    images: ["https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "LG Official Store", logo: "" },
-    description: "Pixel Self-lit OLED dengan hitam sempurna, kontras tak terbatas, serta α9 AI Processor Gen7."
-  },
-  {
-    id: "tv4",
-    name: "Sony Bravia 8",
-    category: "tv",
-    price: 27999000,
-    originalPrice: 29999000,
-    rating: 4.9,
-    penilaian: 310,
-    terjual: "500+",
-    isMall: true,
-    sizes: ["55 Inci", "65 Inci"],
-    images: ["https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Sony Official Store", logo: "" },
-    description: "Pengalaman menonton bioskop di rumah ditenagai XR Processor nan mutakhir."
-  },
-  {
-    id: "tv5",
-    name: "Xiaomi TV A Pro 55",
-    category: "tv",
-    price: 5299000,
-    originalPrice: 5999000,
-    rating: 4.8,
-    penilaian: 4100,
-    terjual: "8RB+",
-    isMall: true,
-    sizes: ["55 Inci 4K UHD"],
-    images: ["https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"],
-    store: { name: "Xiaomi Official Store", logo: "" },
-    description: "Layar 4K bezel-less berharga ekonomis dengan sistem pintar Google TV terintegrasi."
   }
 ];
+
+// ==========================================
+// MOCK USERS & SYSTEM AUTHENTICATION
+// ==========================================
+const registeredUsers = [
+  {
+    id: "u1",
+    name: "BeliKuy Official Admin",
+    gmail: "admin.seller@belikuy.id",
+    phone: "081234567890",
+    pass: "admin123",
+    role: "admin", // Admin Seller
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+  },
+  {
+    id: "u2",
+    name: "Budi Santoso",
+    gmail: "budi.santoso@gmail.com",
+    phone: "081987654321",
+    pass: "user123",
+    role: "user", // Pembeli Biasa
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80"
+  }
+];
+
+// Mode Default saat aplikasi dimuat pertama kali: Pembeli Biasa (Budi Santoso)
+let currentUser = registeredUsers[1]; 
 
 // ==========================================
 // STATE MANAGEMENT GLOBAL
@@ -632,6 +175,119 @@ function formatRupiah(num) {
 }
 
 // ==========================================
+// RENDER AUTH PROFILE & CONTROLS BAR
+// ==========================================
+function renderAuthHeader() {
+  const container = document.getElementById('authContainer');
+  const adminBar = document.getElementById('adminControlBar');
+  if (!container) return;
+
+  if (currentUser) {
+    container.innerHTML = `
+      <div class="flex items-center gap-3 bg-red-700/60 p-1.5 px-3 rounded-full border border-red-500/40">
+        <img src="${currentUser.avatar}" class="w-7 h-7 rounded-full object-cover border border-white/50">
+        <div class="text-[10px] leading-tight hidden sm:block">
+          <div class="font-bold flex items-center gap-1">
+            <span>${currentUser.name}</span>
+            <span class="bg-${currentUser.role === 'admin' ? 'yellow-400 text-red-900' : 'blue-400 text-white'} font-extrabold px-1 rounded text-[8px] uppercase">${currentUser.role}</span>
+          </div>
+          <div class="text-white/80 text-[9px]">${currentUser.gmail}</div>
+        </div>
+        <button onclick="handleLogout()" class="ml-1 text-white/80 hover:text-white p-1 text-xs" title="Keluar">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    `;
+
+    // Sembunyikan/Tampilkan Panel Khusus Admin Seller
+    if (adminBar) {
+      if (currentUser.role === 'admin') {
+        adminBar.classList.remove('hidden');
+      } else {
+        adminBar.classList.add('hidden');
+      }
+    }
+  } else {
+    container.innerHTML = `
+      <button onclick="toggleLoginModal()" class="bg-white text-red-600 font-bold px-4 py-1.5 rounded-full text-xs shadow hover:bg-slate-50 transition flex items-center gap-1.5">
+        <i class="fa-solid fa-right-to-bracket"></i> Masuk
+      </button>
+    `;
+    if (adminBar) adminBar.classList.add('hidden');
+  }
+}
+
+// ==========================================
+// AUTHENTICATION & LOGIN SELLER SYSTEM
+// ==========================================
+function toggleLoginModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.classList.toggle('hidden');
+}
+
+function handleLoginSubmit(e) {
+  e.preventDefault();
+  const inputId = document.getElementById('loginIdentifier').value.trim().toLowerCase();
+  const inputPass = document.getElementById('loginPassword') ? document.getElementById('loginPassword').value.trim() : "";
+
+  // Cari user berdasarkan Gmail/HP & Password
+  const foundUser = registeredUsers.find(u => 
+    (u.gmail.toLowerCase() === inputId || u.phone === inputId) && 
+    (!u.pass || u.pass === inputPass)
+  );
+
+  if (foundUser) {
+    currentUser = foundUser;
+    alert(`Berhasil Login!\nSelamat datang kembali, ${currentUser.name} (${currentUser.role.toUpperCase()})`);
+  } else {
+    // Apabila user mendaftar acak sebagai Buyer
+    currentUser = {
+      id: "u_" + Date.now(),
+      name: "Pengguna Baru",
+      gmail: inputId.includes('@') ? inputId : "user@gmail.com",
+      phone: inputId.includes('@') ? "081200000000" : inputId,
+      role: "user",
+      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80"
+    };
+    alert(`Masuk sebagai Pembeli Biasa (${currentUser.gmail})`);
+  }
+
+  toggleLoginModal();
+  renderAuthHeader();
+  renderProducts();
+}
+
+function quickLoginAdmin() {
+  const adminUser = registeredUsers.find(u => u.role === 'admin');
+  if (adminUser) {
+    currentUser = adminUser;
+    alert("🎉 Akses Terverifikasi!\nAnda sekarang login sebagai Admin Seller BeliKuy.");
+    toggleLoginModal();
+    renderAuthHeader();
+    renderProducts();
+  }
+}
+
+function handleLogout() {
+  if (confirm("Apakah Anda yakin ingin keluar dari akun?")) {
+    currentUser = null;
+    renderAuthHeader();
+    renderProducts();
+  }
+}
+
+// PERIKSA HAK AKSES ADMIN SELLER SEBELUM MEMBUKA AKSES CRUD
+function requireAdminAuth(callback) {
+  if (!currentUser || currentUser.role !== 'admin') {
+    alert("⛔ Akses Ditolak!\nFitur ini khusus untuk Admin Seller. Silakan login dengan Akun Admin terlebih dahulu.");
+    toggleLoginModal();
+    return false;
+  }
+  if (typeof callback === 'function') callback();
+  return true;
+}
+
+// ==========================================
 // RENDER KATALOG & FILTER PRODUK
 // ==========================================
 function renderProducts() {
@@ -639,7 +295,7 @@ function renderProducts() {
   if (!grid) return;
 
   const filtered = products.filter(p => {
-    const matchCat = currentCategory === 'semua' || p.category === currentCategory;
+    const matchCat = currentCategory === 'semua' || p.category.toLowerCase() === currentCategory.toLowerCase();
     const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchCat && matchSearch;
   });
@@ -654,11 +310,13 @@ function renderProducts() {
     return;
   }
 
+  const isAdmin = currentUser && currentUser.role === 'admin';
+
   grid.innerHTML = filtered.map(p => {
     const isWish = wishlist.includes(p.id);
 
     return `
-      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition overflow-hidden group flex flex-col cursor-pointer" onclick="openProductDetail('${p.id}')">
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition overflow-hidden group flex flex-col cursor-pointer relative" onclick="openProductDetail('${p.id}')">
         
         <!-- Image Container -->
         <div class="relative overflow-hidden aspect-square bg-slate-100">
@@ -689,6 +347,19 @@ function renderProducts() {
             </div>
             <span>Terjual ${p.terjual}</span>
           </div>
+
+          ${isAdmin ? `
+            <!-- Action Bar Khusus Admin Seller -->
+            <div class="flex gap-1.5 pt-2 border-t border-slate-100" onclick="event.stopPropagation();">
+              <button onclick="openAdminProductModal('${p.id}')" class="flex-1 bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold py-1 rounded text-[10px] border border-amber-200">
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+              </button>
+              <button onclick="deleteProduct('${p.id}')" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 font-bold py-1 rounded text-[10px] border border-red-200">
+                <i class="fa-solid fa-trash"></i> Hapus
+              </button>
+            </div>
+          ` : ''}
+
         </div>
 
       </div>
@@ -698,28 +369,12 @@ function renderProducts() {
 
 function filterCategory(cat) {
   currentCategory = cat;
-  document.querySelectorAll('.cat-btn').forEach(btn => {
-    btn.classList.remove('bg-red-600', 'text-white', 'font-bold');
-    btn.classList.add('bg-white', 'text-slate-600', 'font-medium');
-  });
-  if (event && event.target) {
-    event.target.classList.remove('bg-white', 'text-slate-600', 'font-medium');
-    event.target.classList.add('bg-red-600', 'text-white', 'font-bold');
-  }
   renderProducts();
 }
 
 function handleSearch(val) {
   searchQuery = val;
   renderProducts();
-}
-
-function searchTag(tag) {
-  const input = document.getElementById('searchInput');
-  if (input) {
-    input.value = tag;
-    handleSearch(tag);
-  }
 }
 
 // ==========================================
@@ -798,7 +453,7 @@ function changeDetailQty(amount) {
 }
 
 // ==========================================
-// KERANJANG (CART)
+// KERANJANG & CHECKOUT
 // ==========================================
 function quickAddToCart(id) {
   const p = products.find(item => item.id === id);
@@ -853,7 +508,6 @@ function renderCartItems() {
       <div class="py-12 text-center text-slate-400 space-y-2">
         <i class="fa-solid fa-cart-flatbed text-4xl mb-2"></i>
         <p class="font-bold text-xs">Keranjangmu masih kosong</p>
-        <p class="text-[11px]">Yuk, tambah produk impianmu!</p>
       </div>`;
     calculateCartTotals();
     return;
@@ -886,9 +540,7 @@ function renderCartItems() {
 
 function updateCartQty(idx, amount) {
   cart[idx].qty += amount;
-  if (cart[idx].qty <= 0) {
-    cart.splice(idx, 1);
-  }
+  if (cart[idx].qty <= 0) cart.splice(idx, 1);
   updateCartBadge();
   renderCartItems();
 }
@@ -899,59 +551,33 @@ function removeFromCart(idx) {
   renderCartItems();
 }
 
-function selectVoucher(val) {
-  selectedVoucher = val;
-  const tag = document.getElementById('activeVoucherTag');
-  if (!tag) return;
-  
-  if (val === 'ONGKIR100') tag.innerText = '✓ Gratis Ongkir Terpasang';
-  else if (val === 'DISCOUNT10') tag.innerText = '✓ Diskon 10% Terpasang';
-  else if (val === 'HEMAT50K') tag.innerText = '✓ Potongan Rp50.000 Terpasang';
-  else tag.innerText = '';
-
-  calculateCartTotals();
-}
-
 function calculateCartTotals() {
   const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-  let discount = 0;
   let ongkir = cart.length > 0 ? 15000 : 0;
+  let discount = 0;
 
-  if (selectedVoucher === 'ONGKIR100') {
-    ongkir = 0;
-  } else if (selectedVoucher === 'DISCOUNT10') {
-    discount = subtotal * 0.1;
-  } else if (selectedVoucher === 'HEMAT50K') {
-    discount = Math.min(50000, subtotal);
-  }
+  if (selectedVoucher === 'ONGKIR100') ongkir = 0;
+  else if (selectedVoucher === 'DISCOUNT10') discount = Math.round(subtotal * 0.1);
+  else if (selectedVoucher === 'HEMAT50K' && subtotal >= 500000) discount = 50000;
 
   const total = Math.max(0, subtotal - discount + ongkir);
 
   if (document.getElementById('subtotalText')) document.getElementById('subtotalText').innerText = formatRupiah(subtotal);
   if (document.getElementById('ongkirText')) document.getElementById('ongkirText').innerText = formatRupiah(ongkir);
+  if (document.getElementById('discountText')) document.getElementById('discountText').innerText = `- ${formatRupiah(discount)}`;
   if (document.getElementById('totalPayText')) document.getElementById('totalPayText').innerText = formatRupiah(total);
 
-  const discRow = document.getElementById('discountRow');
-  if (discRow) {
-    if (discount > 0) {
-      discRow.classList.remove('hidden');
-      document.getElementById('discountText').innerText = `-${formatRupiah(discount)}`;
-    } else {
-      discRow.classList.add('hidden');
-    }
-  }
+  return total;
 }
 
-// ==========================================
-// CHECKOUT & PESANAN
-// ==========================================
 function openCheckoutModal() {
   if (cart.length === 0) {
-    alert('Keranjang belanjaanmu masih kosong!');
+    alert("Keranjang belanja kosong!");
     return;
   }
   toggleCartModal();
-  document.getElementById('checkoutTotalPay').innerText = document.getElementById('totalPayText').innerText;
+  const totalPay = calculateCartTotals();
+  document.getElementById('checkoutTotalPay').innerText = formatRupiah(totalPay);
   toggleCheckoutModal();
 }
 
@@ -962,38 +588,41 @@ function toggleCheckoutModal() {
 
 function processCheckoutOrder(e) {
   e.preventDefault();
-  const orderId = 'BK-' + Math.floor(100000 + Math.random() * 900000);
-  const totalPay = document.getElementById('checkoutTotalPay').innerText;
-  const paymentMethod = document.getElementById('paymentMethod').value;
+  
+  if (cart.length === 0) return;
+
+  const total = calculateCartTotals();
+  const paymentMethodSelect = document.getElementById('paymentMethod');
+  const paymentMethod = paymentMethodSelect ? paymentMethodSelect.value : "QRIS / E-Wallet";
 
   const newOrder = {
-    id: orderId,
-    date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
-    items: [...cart],
-    totalPrice: totalPay,
+    id: "INV/" + Date.now().toString().slice(-8),
+    date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+    items: JSON.parse(JSON.stringify(cart)),
+    totalPay: total,
     paymentMethod: paymentMethod,
-    status: 'Diproses'
+    user: currentUser ? currentUser.name : "Pembeli Anonim",
+    status: "Diproses Seller"
   };
 
   orders.unshift(newOrder);
   cart = [];
+  selectedVoucher = '';
   updateCartBadge();
-
   toggleCheckoutModal();
-  alert(`Pesanan Berhasil dibuat!\nID Transaksi: ${orderId}`);
+
+  alert(`🎉 Transaksi Berhasil!\nNo. Invoice: ${newOrder.id}\nTotal Bayar: ${formatRupiah(total)}`);
   toggleOrdersModal();
 }
 
 // ==========================================
-// WISHLIST / FAVORIT
+// WISHLIST & ORDERS
 // ==========================================
 function toggleWishlist(id) {
   const idx = wishlist.indexOf(id);
-  if (idx > -1) {
-    wishlist.splice(idx, 1);
-  } else {
-    wishlist.push(id);
-  }
+  if (idx > -1) wishlist.splice(idx, 1);
+  else wishlist.push(id);
+
   updateWishlistBadge();
   renderProducts();
 }
@@ -1001,32 +630,16 @@ function toggleWishlist(id) {
 function updateWishlistBadge() {
   const badge = document.getElementById('wishlistBadge');
   if (!badge) return;
-  if (wishlist.length > 0) {
-    badge.innerText = wishlist.length;
-    badge.classList.remove('hidden');
-  } else {
-    badge.classList.add('hidden');
-  }
-}
-
-function toggleWishlistFromDetail() {
-  if (selectedProductId) {
-    toggleWishlist(selectedProductId);
-    updateWishlistDetailBtn();
-  }
+  badge.innerText = wishlist.length;
+  if (wishlist.length > 0) badge.classList.remove('hidden');
+  else badge.classList.add('hidden');
 }
 
 function updateWishlistDetailBtn() {
-  const isWish = wishlist.includes(selectedProductId);
   const icon = document.getElementById('detailHeartIcon');
-
-  if (icon) {
-    if (isWish) {
-      icon.className = "fa-solid fa-heart text-red-600";
-    } else {
-      icon.className = "fa-regular fa-heart";
-    }
-  }
+  if (!icon) return;
+  const isWish = wishlist.includes(selectedProductId);
+  icon.className = isWish ? 'fa-solid fa-heart text-red-600' : 'fa-regular fa-heart';
 }
 
 function toggleWishlistModal() {
@@ -1041,95 +654,176 @@ function renderWishlistItems() {
   if (!container) return;
 
   if (wishlist.length === 0) {
-    container.innerHTML = `
-      <div class="py-12 text-center text-slate-400 space-y-2">
-        <i class="fa-solid fa-heart-crack text-4xl mb-2 text-slate-300"></i>
-        <p class="font-bold text-xs">Wishlist masih kosong</p>
-      </div>`;
+    container.innerHTML = `<div class="py-12 text-center text-slate-400 space-y-2"><i class="fa-solid fa-heart-crack text-4xl mb-2"></i><p class="font-bold text-xs">Wishlist masih kosong</p></div>`;
     return;
   }
 
-  const items = products.filter(p => wishlist.includes(p.id));
-  container.innerHTML = items.map(p => `
-    <div class="flex items-center gap-3 p-2.5 border border-slate-100 rounded-xl bg-white shadow-sm">
-      <img src="${p.images[0]}" class="w-12 h-12 object-cover rounded-lg border">
-      <div class="flex-1 min-w-0 space-y-0.5">
-        <h4 class="font-bold text-xs text-slate-800 truncate">${p.name}</h4>
-        <p class="font-black text-xs text-red-600">${formatRupiah(p.price)}</p>
+  const wishProducts = products.filter(p => wishlist.includes(p.id));
+
+  container.innerHTML = wishProducts.map(p => `
+    <div class="flex items-center justify-between p-2.5 border border-slate-100 rounded-xl bg-white shadow-sm">
+      <div class="flex items-center gap-3">
+        <img src="${p.images[0]}" class="w-12 h-12 object-cover rounded-lg border">
+        <div>
+          <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${p.name}</h4>
+          <p class="font-black text-xs text-red-600">${formatRupiah(p.price)}</p>
+        </div>
       </div>
-      <div class="flex items-center gap-1">
-        <button onclick="quickAddToCart('${p.id}')" class="bg-red-100 text-red-600 text-[11px] font-bold px-2 py-1 rounded-lg hover:bg-red-200">
-          + Keranjang
-        </button>
-        <button onclick="toggleWishlist('${p.id}'); renderWishlistItems();" class="text-slate-400 hover:text-red-600 text-xs px-1">
-          <i class="fa-solid fa-trash"></i>
-        </button>
+      <div class="flex items-center gap-2">
+        <button onclick="quickAddToCart('${p.id}')" class="bg-red-100 text-red-600 font-bold px-2.5 py-1 rounded-lg text-xs hover:bg-red-200">+ Cart</button>
+        <button onclick="toggleWishlist('${p.id}'); renderWishlistItems();" class="text-slate-400 hover:text-red-600 text-xs p-1"><i class="fa-solid fa-trash"></i></button>
       </div>
     </div>
   `).join('');
 }
 
-// ==========================================
-// RIWAYAT TRANSAKSI / PESANAN
-// ==========================================
 function toggleOrdersModal() {
   const modal = document.getElementById('ordersModal');
   if (!modal) return;
   modal.classList.toggle('hidden');
-  if (!modal.classList.contains('hidden')) renderOrdersList();
+  if (!modal.classList.contains('hidden')) renderOrdersItems();
 }
 
-function renderOrdersList() {
+function renderOrdersItems() {
   const container = document.getElementById('ordersListContainer');
   if (!container) return;
 
   if (orders.length === 0) {
-    container.innerHTML = `
-      <div class="py-12 text-center text-slate-400 space-y-2">
-        <i class="fa-solid fa-receipt text-4xl mb-2 text-slate-300"></i>
-        <p class="font-bold text-xs">Belum ada transaksi</p>
-      </div>`;
+    container.innerHTML = `<div class="py-12 text-center text-slate-400 space-y-2"><i class="fa-solid fa-receipt text-4xl mb-2"></i><p class="font-bold text-xs">Belum ada riwayat transaksi</p></div>`;
     return;
   }
 
-  container.innerHTML = orders.map(order => `
-    <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-2.5">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-2 text-[11px]">
+  container.innerHTML = orders.map(ord => `
+    <div class="border border-slate-200 rounded-2xl p-4 bg-white space-y-3 text-xs shadow-sm">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
         <div>
-          <span class="font-bold text-slate-800">${order.id}</span>
-          <span class="text-slate-400 mx-1">•</span>
-          <span class="text-slate-500">${order.date}</span>
+          <span class="font-black text-slate-800 text-xs">${ord.id}</span>
+          <span class="text-slate-400 text-[10px] block">${ord.date} • A.n ${ord.user}</span>
         </div>
-        <span class="px-2 py-0.5 rounded-full font-bold bg-amber-100 text-amber-700 text-[10px]">
-          ${order.status}
-        </span>
+        <span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2.5 py-1 rounded-full">${ord.status}</span>
       </div>
-
       <div class="space-y-2">
-        ${order.items.map(item => `
-          <div class="flex items-center gap-2.5">
-            <img src="${item.images[0]}" class="w-10 h-10 rounded-lg object-cover border border-slate-100">
+        ${ord.items.map(i => `
+          <div class="flex items-center gap-3">
+            <img src="${i.images[0]}" class="w-10 h-10 object-cover rounded-lg border">
             <div class="flex-1 min-w-0">
-              <p class="text-xs font-bold text-slate-800 truncate">${item.name}</p>
-              <p class="text-[10px] text-slate-500">${item.qty} x ${formatRupiah(item.price)}</p>
+              <div class="font-semibold text-slate-700 text-xs truncate">${i.name}</div>
+              <div class="text-[10px] text-slate-400">${i.qty} x ${formatRupiah(i.price)}</div>
             </div>
+            <div class="font-bold text-slate-800 text-xs">${formatRupiah(i.price * i.qty)}</div>
           </div>
         `).join('')}
       </div>
-
-      <div class="flex items-center justify-between border-t border-slate-100 pt-2 text-[11px]">
-        <div>
-          <span class="text-slate-500">Total:</span>
-          <span class="font-black text-red-600 ml-1">${order.totalPrice}</span>
-        </div>
-        <span class="text-slate-400">${order.paymentMethod}</span>
+      <div class="flex justify-between items-center border-t border-slate-100 pt-2.5">
+        <span class="text-slate-500 font-medium text-[11px]">Total Pembayaran:</span>
+        <span class="text-red-600 font-black text-sm">${formatRupiah(ord.totalPay)}</span>
       </div>
     </div>
   `).join('');
 }
 
-// INITIALIZATION ON LOAD
-document.addEventListener('DOMContentLoaded', () => {
+// ==========================================
+// ADMIN SELLER CRUD SYSTEM (DI-PROTEKSI AUTH ADMIN)
+// ==========================================
+function openAdminProductModal(prodId = null) {
+  // Verifikasi Validasi Admin Seller terlebih dahulu
+  requireAdminAuth(() => {
+    const modal = document.getElementById('adminProductModal');
+    const form = document.getElementById('adminProductForm');
+    const title = document.getElementById('adminModalTitle');
+    if (!modal || !form) return;
+
+    form.reset();
+
+    if (prodId) {
+      const p = products.find(item => item.id === prodId);
+      if (!p) return;
+      title.innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-400"></i> Edit Produk: ${p.name}`;
+      document.getElementById('adminProdId').value = p.id;
+      document.getElementById('adminProdNama').value = p.name;
+      document.getElementById('adminProdKategori').value = p.category;
+      document.getElementById('adminProdHarga').value = p.price;
+      document.getElementById('adminProdHargaDiskon').value = p.originalPrice || '';
+      document.getElementById('adminProdGambar').value = p.images[0];
+    } else {
+      title.innerHTML = `<i class="fa-solid fa-box text-amber-400"></i> Tambah Produk Baru`;
+      document.getElementById('adminProdId').value = '';
+    }
+
+    modal.classList.remove('hidden');
+  });
+}
+
+function closeAdminProductModal() {
+  const modal = document.getElementById('adminProductModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function handleSaveProduct(e) {
+  e.preventDefault();
+
+  // Validasi Ganda Akses Admin
+  if (!requireAdminAuth()) return;
+
+  const id = document.getElementById('adminProdId').value;
+  const name = document.getElementById('adminProdNama').value.trim();
+  const category = document.getElementById('adminProdKategori').value;
+  const price = parseInt(document.getElementById('adminProdHarga').value) || 0;
+  const originalPriceVal = document.getElementById('adminProdHargaDiskon').value;
+  const originalPrice = originalPriceVal ? parseInt(originalPriceVal) : null;
+  const image = document.getElementById('adminProdGambar').value.trim() || "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80";
+
+  if (id) {
+    // Edit Produk
+    const idx = products.findIndex(p => p.id === id);
+    if (idx > -1) {
+      products[idx].name = name;
+      products[idx].category = category;
+      products[idx].price = price;
+      products[idx].originalPrice = originalPrice;
+      products[idx].images[0] = image;
+      alert("Produk berhasil diperbarui!");
+    }
+  } else {
+    // Tambah Produk Baru
+    const newProduct = {
+      id: "p_" + Date.now(),
+      name: name,
+      category: category,
+      price: price,
+      originalPrice: originalPrice,
+      rating: 5.0,
+      penilaian: 1,
+      terjual: "0",
+      isMall: true,
+      sizes: ["Standard"],
+      images: [image],
+      store: { name: currentUser ? currentUser.name : "Official Store", logo: "" },
+      description: "Produk terbaru yang baru saja ditambahkan oleh Admin Seller BeliKuy."
+    };
+    products.unshift(newProduct);
+    alert("Produk baru berhasil ditambahkan!");
+  }
+
+  closeAdminProductModal();
+  renderProducts();
+}
+
+function deleteProduct(id) {
+  requireAdminAuth(() => {
+    if (confirm("Apakah Anda yakin ingin menghapus produk ini dari katalog?")) {
+      products = products.filter(p => p.id !== id);
+      renderProducts();
+      alert("Produk berhasil dihapus!");
+    }
+  });
+}
+
+// ==========================================
+// INITIALIZATION ON PAGE LOAD
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  renderAuthHeader();
   renderProducts();
   updateCartBadge();
   updateWishlistBadge();
