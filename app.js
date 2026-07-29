@@ -1114,6 +1114,152 @@ window.buyNowFromDetail = function() {
   // Buka Modal Checkout / Pembayaran
   const checkoutModal = document.getElementById('checkoutModal') || document.getElementById('cartModal');
   if (checkoutModal) {
+    // ===================================================
+// SISTEM KERANJANG BELANJA REAL-TIME (BELIKUY)
+// ===================================================
+
+// Array penampung barang di keranjang
+if (typeof cart === 'undefined') {
+  var cart = [];
+}
+
+// 1. FUNGSI RENDER TAMPILAN KERANJANG
+window.renderCart = function() {
+  const cartItemsContainer = document.getElementById('cartItems') || document.querySelector('#cartModal .space-y-4') || document.querySelector('#cartModal .p-4');
+  const cartSubtotalEl = document.getElementById('cartSubtotal') || document.getElementById('subtotalPrice');
+  const cartTotalEl = document.getElementById('cartTotal') || document.getElementById('totalPrice');
+  const cartCountBadges = document.querySelectorAll('.cart-count, #cartCount');
+
+  // Cari elemen pesan "Keranjang Belanja Kosong"
+  const emptyState = document.querySelector('#cartModal .text-center');
+
+  // Update Badge Jumlah Keranjang di Header
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  cartCountBadges.forEach(badge => {
+    badge.innerText = totalItems;
+  });
+
+  if (!cartItemsContainer) return;
+
+  if (cart.length === 0) {
+    // Tampilan Jika Keranjang Kosong
+    cartItemsContainer.innerHTML = `
+      <div class="text-center py-12">
+        <i class="fa-solid fa-cart-shopping text-5xl text-slate-300 mb-3"></i>
+        <p class="text-slate-500 font-bold text-sm">Keranjang Belanja Kosong</p>
+      </div>
+    `;
+    if (cartSubtotalEl) cartSubtotalEl.innerText = 'Rp0';
+    if (cartTotalEl) cartTotalEl.innerText = 'Rp0';
+    return;
+  }
+
+  // Hitung Total Harga
+  let subtotal = 0;
+  let htmlContent = '<div class="space-y-3 max-h-[50vh] overflow-y-auto pr-1">';
+
+  cart.forEach((item, index) => {
+    const itemTotal = item.price * item.qty;
+    subtotal += itemTotal;
+
+    htmlContent += `
+      <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg border border-slate-200">
+        <div class="flex-1 min-w-0">
+          <h4 class="font-bold text-xs text-slate-800 truncate">${item.name}</h4>
+          <p class="text-xs text-red-600 font-black mt-0.5">Rp${Number(item.price).toLocaleString('id-ID')}</p>
+          <p class="text-[10px] text-slate-400">Warna: ${item.color || 'Default'}</p>
+        </div>
+        <div class="flex items-center border border-slate-300 rounded-lg overflow-hidden bg-white text-xs shrink-0">
+          <button onclick="updateCartQty(${index}, -1)" class="px-2 py-1 bg-slate-100 font-bold hover:bg-slate-200">-</button>
+          <span class="px-2 py-1 font-bold">${item.qty}</span>
+          <button onclick="updateCartQty(${index}, 1)" class="px-2 py-1 bg-slate-100 font-bold hover:bg-slate-200">+</button>
+        </div>
+        <button onclick="removeFromCart(${index})" class="text-slate-400 hover:text-red-500 text-sm p-1">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    `;
+  });
+
+  htmlContent += '</div>';
+  cartItemsContainer.innerHTML = htmlContent;
+
+  // Render Subtotal & Total Bayar
+  if (cartSubtotalEl) cartSubtotalEl.innerText = `Rp${subtotal.toLocaleString('id-ID')}`;
+  if (cartTotalEl) cartTotalEl.innerText = `Rp${subtotal.toLocaleString('id-ID')}`;
+};
+
+// 2. FUNGSI MASUKKAN KE KERANJANG DARI MODAL PRODUK
+window.addDetailToCart = function() {
+  if (!currentModalProduct) {
+    alert("Silakan pilih produk terlebih dahulu!");
+    return;
+  }
+
+  const qtyInput = document.getElementById('detailQtyInput');
+  const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+  
+  // Ambil warna yang dipilih
+  const activeColorBtn = document.querySelector('#colorOptions .border-red-600');
+  const selectedColor = activeColorBtn ? activeColorBtn.innerText.trim() : 'Hitam';
+
+  // Cek apakah produk dengan ID & warna sama sudah ada di keranjang
+  const existingIndex = cart.findIndex(item => item.id === currentModalProduct.id && item.color === selectedColor);
+
+  if (existingIndex > -1) {
+    cart[existingIndex].qty += qty;
+  } else {
+    cart.push({
+      id: currentModalProduct.id,
+      name: currentModalProduct.name,
+      price: currentModalProduct.price,
+      image: currentModalProduct.image,
+      color: selectedColor,
+      qty: qty
+    });
+  }
+
+  // Update tampilan keranjang
+  renderCart();
+
+  alert(`Berhasil menambahkan ${qty}x "${currentModalProduct.name}" ke dalam keranjang!`);
+  closeProductDetailModal();
+};
+
+// 3. FUNGSI BUKA MODAL KERANJANG
+window.openCartModal = function() {
+  renderCart();
+  const cartModal = document.getElementById('cartModal');
+  if (cartModal) {
+    cartModal.classList.remove('hidden');
+  }
+};
+
+// 4. FUNGSI UPDATE QUANTITY DI KERANJANG
+window.updateCartQty = function(index, change) {
+  if (!cart[index]) return;
+  cart[index].qty += change;
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+  renderCart();
+};
+
+// 5. FUNGSI HAPUS ITEM DARI KERANJANG
+window.removeFromCart = function(index) {
+  cart.splice(index, 1);
+  renderCart();
+};
+
+// 6. FUNGSI BELI SEKARANG (LANGSUNG KE CHECKOUT)
+window.buyNowFromDetail = function() {
+  addDetailToCart();
+  const cartModal = document.getElementById('cartModal');
+  if (cartModal) {
+    cartModal.classList.remove('hidden');
+  }
+};
     checkoutModal.classList.remove('hidden');
   } else if (typeof openCheckoutModal === 'function') {
     openCheckoutModal();
