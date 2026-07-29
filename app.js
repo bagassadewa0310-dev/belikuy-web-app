@@ -1015,8 +1015,50 @@ function selectColor(element) {
   element.className = "color-btn border-2 border-red-600 bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1";
   element.insertAdjacentHTML('afterbegin', '<i class="fa-solid fa-check text-[10px]"></i> ');
 }
+  
   // Auto Render saat Halaman Selesai di-load
   document.addEventListener("DOMContentLoaded", function () {
     window.renderProfileHeader();
   });
 })();
+// ==========================================
+// FUNGSI BUKA & TUTUP MODAL DETAIL PRODUK
+// ==========================================
+window.openProductDetailModal = function(productId) {
+  // Ambil data produk dari array INITIAL_PRODUCTS
+  const productList = typeof INITIAL_PRODUCTS !== 'undefined' ? INITIAL_PRODUCTS : (typeof products !== 'undefined' ? products : []);
+  const product = productList.find(p => p.id === productId || p.id == productId);
+  
+  if (!product) {
+    console.error("Produk tidak ditemukan untuk ID:", productId);
+    return;
+  }
+
+  // Isi data ke elemen-elemen Modal HTML
+  const titleEl = document.getElementById('detailTitle');
+  const priceEl = document.getElementById('detailPrice');
+  const mainImgEl = document.getElementById('detailMainImg');
+  const catEl = document.getElementById('modalBreadcrumbCat');
+  const nameEl = document.getElementById('modalBreadcrumbName');
+  const ratingEl = document.getElementById('detailRating');
+
+  if (titleEl) titleEl.innerText = product.name;
+  if (priceEl) priceEl.innerText = `Rp${Number(product.price).toLocaleString('id-ID')}`;
+  if (mainImgEl) mainImgEl.src = product.image;
+  if (catEl) catEl.innerText = product.category || 'Smartphone';
+  if (nameEl) nameEl.innerText = product.name;
+  if (ratingEl && product.rating) ratingEl.innerText = product.rating;
+
+  // Tampilkan Modal
+  const modal = document.getElementById('productDetailModal');
+  if (modal) {
+    modal.classList.remove('hidden');
+  }
+};
+
+window.closeProductDetailModal = function() {
+  const modal = document.getElementById('productDetailModal');
+  if (modal) {
+    modal.classList.add('hidden');
+  }
+};
