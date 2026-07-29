@@ -1000,7 +1000,21 @@ document.addEventListener('DOMContentLoaded', () => {
     window.renderProfileHeader();
     alert("Anda telah berhasil keluar dari akun BeliKuy.");
   };
+// Function untuk memilih warna variasi di Modal Detail Produk
+function selectColor(element) {
+  // Reset semua tombol warna ke style normal
+  const buttons = document.querySelectorAll('#colorOptions .color-btn');
+  buttons.forEach(btn => {
+    btn.className = "color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-bold text-[11px]";
+    // Hapus ikon centang jika ada
+    const checkIcon = btn.querySelector('.fa-check');
+    if (checkIcon) checkIcon.remove();
+  });
 
+  // Terapkan style aktif pada tombol yang diklik
+  element.className = "color-btn border-2 border-red-600 bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1";
+  element.insertAdjacentHTML('afterbegin', '<i class="fa-solid fa-check text-[10px]"></i> ');
+}
   // Auto Render saat Halaman Selesai di-load
   document.addEventListener("DOMContentLoaded", function () {
     window.renderProfileHeader();
