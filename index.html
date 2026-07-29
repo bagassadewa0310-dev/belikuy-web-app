@@ -61,20 +61,20 @@
       <!-- NAV ICONS & USER PROFILE / AUTH SECTION -->
       <div class="flex items-center gap-5 shrink-0">
         <!-- Wishlist Icon -->
-        <button onclick="toggleWishlistModal()" class="relative hover:opacity-80 transition">
+        <button onclick="toggleWishlistModal()" class="relative hover:opacity-80 transition" title="Wishlist">
           <i class="fa-regular fa-heart text-xl"></i>
           <span id="wishlistBadge" class="absolute -top-2 -right-2 bg-yellow-400 text-red-900 font-bold text-[9px] px-1.5 py-0.5 rounded-full hidden">0</span>
         </button>
 
         <!-- Cart Icon -->
-        <button onclick="toggleCartModal()" class="relative hover:opacity-80 transition">
+        <button onclick="toggleCartModal()" class="relative hover:opacity-80 transition" title="Keranjang">
           <i class="fa-solid fa-cart-shopping text-xl"></i>
           <span id="cartBadge" class="absolute -top-2 -right-2 bg-yellow-400 text-red-900 font-bold text-[9px] px-1.5 py-0.5 rounded-full">0</span>
         </button>
 
-        <!-- Dynamic User Profile & Login / Logout Container -->
+        <!-- Dynamic User Profile / Login Button -->
         <div id="authContainer" class="flex items-center">
-          <!-- Rendered dynamically via app.js -->
+          <!-- Rendered dynamically via JS -->
         </div>
       </div>
 
@@ -166,6 +166,78 @@
           <i class="fa-solid fa-user-shield"></i> Login Sebagai Admin Seller
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL GABUNGAN: PROFIL USER & TRANSAKSI -->
+  <!-- ========================================== -->
+  <div id="userProfileModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+      
+      <!-- Header Modal & Tab Selector -->
+      <div class="bg-slate-900 text-white p-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-circle-user text-red-500 text-lg"></i>
+          <h3 class="font-bold text-sm">Akun Saya</h3>
+        </div>
+        <button onclick="toggleUserProfileModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <!-- Tab Buttons Navigation -->
+      <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-bold text-slate-600">
+        <button id="tabBtnProfile" onclick="switchProfileTab('profile')" class="flex-1 py-3 border-b-2 border-red-600 text-red-600 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-user"></i> Profil Saya
+        </button>
+        <button id="tabBtnOrders" onclick="switchProfileTab('orders')" class="flex-1 py-3 border-b-2 border-transparent hover:text-red-600 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-receipt"></i> Riwayat Transaksi
+        </button>
+      </div>
+
+      <!-- Modal Body Content -->
+      <div class="p-5 overflow-y-auto flex-1 text-xs">
+        
+        <!-- CONTENT TAB 1: PROFIL USER -->
+        <div id="tabContentProfile" class="space-y-4">
+          <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <img id="profAvatar" src="" class="w-16 h-16 rounded-full object-cover border-2 border-red-600">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <h4 id="profName" class="font-black text-sm text-slate-800">Nama User</h4>
+                <span id="profRoleBadge" class="text-[9px] font-black px-2 py-0.5 rounded uppercase">User</span>
+              </div>
+              <p id="profGmail" class="text-slate-500 text-[11px] flex items-center gap-1">
+                <i class="fa-regular fa-envelope"></i> -
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 text-center">
+            <div class="bg-red-50 border border-red-100 p-3 rounded-xl">
+              <span class="text-slate-500 block text-[10px] uppercase font-bold">Total Transaksi</span>
+              <span id="profTotalOrders" class="text-lg font-black text-red-600">0</span>
+            </div>
+            <div class="bg-amber-50 border border-amber-100 p-3 rounded-xl">
+              <span class="text-slate-500 block text-[10px] uppercase font-bold">Item Wishlist</span>
+              <span id="profTotalWishlist" class="text-lg font-black text-amber-600">0</span>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="handleLogout()" class="w-full bg-red-100 hover:bg-red-200 text-red-600 font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-right-from-bracket"></i> Keluar Akun (Logout)
+            </button>
+          </div>
+        </div>
+
+        <!-- CONTENT TAB 2: RIWAYAT TRANSAKSI -->
+        <div id="tabContentOrders" class="space-y-3 hidden">
+          <div id="ordersListContainer" class="space-y-3">
+            <!-- Render otomatis via JS -->
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -420,7 +492,7 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- MODAL WISHLIST & ORDERS -->
+  <!-- MODAL WISHLIST -->
   <!-- ========================================== -->
   <div id="wishlistModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
@@ -429,16 +501,6 @@
         <button onclick="toggleWishlistModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
       </div>
       <div id="wishlistItemsList" class="p-4 overflow-y-auto space-y-3 flex-1"></div>
-    </div>
-  </div>
-
-  <div id="ordersModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
-      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
-        <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-receipt text-red-500"></i> Riwayat Transaksi</h3>
-        <button onclick="toggleOrdersModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-      </div>
-      <div id="ordersListContainer" class="p-4 overflow-y-auto space-y-3 flex-1"></div>
     </div>
   </div>
 
@@ -616,18 +678,16 @@
 
       if (currentUser) {
         container.innerHTML = `
-          <div class="flex items-center gap-2 bg-red-700/80 p-1 px-2.5 rounded-full border border-red-500/40">
+          <button onclick="toggleUserProfileModal()" class="flex items-center gap-2 bg-red-700/80 hover:bg-red-700 p-1 px-2.5 rounded-full border border-red-500/40 transition">
             <img src="${currentUser.avatar}" class="w-6 h-6 rounded-full object-cover border border-white">
-            <div class="text-[10px] leading-tight hidden sm:block">
+            <div class="text-[10px] leading-tight text-left hidden sm:block">
               <div class="font-bold flex items-center gap-1">
                 <span>${currentUser.name}</span>
                 <span class="bg-${currentUser.role === 'admin' ? 'yellow-400 text-red-900' : 'blue-400 text-white'} font-extrabold px-1 rounded text-[8px] uppercase">${currentUser.role}</span>
               </div>
             </div>
-            <button onclick="handleLogout()" class="ml-1 text-white/80 hover:text-white p-1 text-xs" title="Keluar">
-              <i class="fa-solid fa-right-from-bracket"></i>
-            </button>
-          </div>
+            <i class="fa-solid fa-chevron-down text-[10px] text-white/80 ml-1"></i>
+          </button>
         `;
 
         if (adminBar) {
@@ -689,9 +749,100 @@
     function handleLogout() {
       if (confirm("Yakin ingin keluar akun?")) {
         currentUser = null;
+        toggleUserProfileModal();
         renderAuthHeader();
         renderProducts();
       }
+    }
+
+    // MODAL PROFIL & TRANSAKSI INTEGRATED
+    function toggleUserProfileModal() {
+      if (!currentUser) {
+        toggleLoginModal();
+        return;
+      }
+      const modal = document.getElementById('userProfileModal');
+      if (modal) {
+        modal.classList.toggle('hidden');
+        if (!modal.classList.contains('hidden')) {
+          renderUserProfileData();
+          switchProfileTab('profile');
+        }
+      }
+    }
+
+    function switchProfileTab(tab) {
+      const btnProf = document.getElementById('tabBtnProfile');
+      const btnOrd = document.getElementById('tabBtnOrders');
+      const contentProf = document.getElementById('tabContentProfile');
+      const contentOrd = document.getElementById('tabContentOrders');
+
+      if (tab === 'profile') {
+        btnProf.className = "flex-1 py-3 border-b-2 border-red-600 text-red-600 flex items-center justify-center gap-2 font-bold";
+        btnOrd.className = "flex-1 py-3 border-b-2 border-transparent hover:text-red-600 text-slate-600 flex items-center justify-center gap-2 font-bold";
+        contentProf.classList.remove('hidden');
+        contentOrd.classList.add('hidden');
+      } else {
+        btnOrd.className = "flex-1 py-3 border-b-2 border-red-600 text-red-600 flex items-center justify-center gap-2 font-bold";
+        btnProf.className = "flex-1 py-3 border-b-2 border-transparent hover:text-red-600 text-slate-600 flex items-center justify-center gap-2 font-bold";
+        contentOrd.classList.remove('hidden');
+        contentProf.classList.add('hidden');
+        renderOrdersItems();
+      }
+    }
+
+    function renderUserProfileData() {
+      if (!currentUser) return;
+      document.getElementById('profAvatar').src = currentUser.avatar;
+      document.getElementById('profName').innerText = currentUser.name;
+      document.getElementById('profGmail').innerHTML = `<i class="fa-regular fa-envelope"></i> ${currentUser.gmail}`;
+      
+      const roleBadge = document.getElementById('profRoleBadge');
+      roleBadge.innerText = currentUser.role;
+      if (currentUser.role === 'admin') {
+        roleBadge.className = "text-[9px] font-black px-2 py-0.5 rounded bg-yellow-400 text-red-900 uppercase";
+      } else {
+        roleBadge.className = "text-[9px] font-black px-2 py-0.5 rounded bg-blue-100 text-blue-700 uppercase";
+      }
+
+      document.getElementById('profTotalOrders').innerText = orders.length;
+      document.getElementById('profTotalWishlist').innerText = wishlist.length;
+    }
+
+    function renderOrdersItems() {
+      const container = document.getElementById('ordersListContainer');
+      if (!container) return;
+
+      if (orders.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-400 space-y-2"><i class="fa-solid fa-receipt text-4xl mb-2"></i><p class="font-bold text-xs">Belum ada riwayat transaksi</p></div>`;
+        return;
+      }
+
+      container.innerHTML = orders.map(ord => `
+        <div class="border border-slate-200 rounded-xl p-3 bg-white space-y-2 text-xs shadow-sm">
+          <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+            <div>
+              <span class="font-black text-slate-800">${ord.id}</span>
+              <span class="text-[10px] text-slate-400 block">${ord.date}</span>
+            </div>
+            <span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2 py-0.5 rounded-full">${ord.status}</span>
+          </div>
+          
+          <div class="space-y-1 py-1">
+            ${ord.items.map(i => `
+              <div class="flex justify-between text-slate-600">
+                <span class="truncate max-w-[200px]">${i.name} (x${i.qty})</span>
+                <span class="font-medium">${formatRupiah(i.price * i.qty)}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="flex justify-between items-center pt-2 border-t border-slate-100 font-bold">
+            <span class="text-slate-500">Total Pembayaran</span>
+            <span class="text-red-600 text-sm">${formatRupiah(ord.totalPay)}</span>
+          </div>
+        </div>
+      `).join('');
     }
 
     // PROTEKSI AKSES CRUD
@@ -970,10 +1121,11 @@
       updateCartBadge();
       toggleCheckoutModal();
       alert(`🎉 Pesanan Berhasil Dibuat!\nNo Invoice: ${newOrder.id}`);
-      toggleOrdersModal();
+      toggleUserProfileModal();
+      switchProfileTab('orders');
     }
 
-    // WISHLIST & ORDERS
+    // WISHLIST
     function toggleWishlist(id) {
       const idx = wishlist.indexOf(id);
       if (idx > -1) wishlist.splice(idx, 1);
@@ -1016,35 +1168,6 @@
             </div>
           </div>
           <button onclick="toggleWishlist('${p.id}'); renderWishlistItems();" class="text-slate-400 hover:text-red-600 text-xs p-1"><i class="fa-solid fa-trash"></i></button>
-        </div>
-      `).join('');
-    }
-
-    function toggleOrdersModal() {
-      const modal = document.getElementById('ordersModal');
-      if (modal) {
-        modal.classList.toggle('hidden');
-        if (!modal.classList.contains('hidden')) renderOrdersItems();
-      }
-    }
-
-    function renderOrdersItems() {
-      const container = document.getElementById('ordersListContainer');
-      if (!container) return;
-      if (orders.length === 0) {
-        container.innerHTML = `<div class="py-12 text-center text-slate-400 space-y-2"><i class="fa-solid fa-receipt text-4xl mb-2"></i><p class="font-bold text-xs">Belum ada riwayat transaksi</p></div>`;
-        return;
-      }
-      container.innerHTML = orders.map(ord => `
-        <div class="border border-slate-200 rounded-xl p-3 bg-white space-y-2 text-xs shadow-sm">
-          <div class="flex justify-between items-center border-b pb-2">
-            <span class="font-black text-slate-800">${ord.id}</span>
-            <span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2 py-0.5 rounded-full">${ord.status}</span>
-          </div>
-          <div class="flex justify-between items-center pt-1">
-            <span class="text-slate-500">Total Pembayaran:</span>
-            <span class="text-red-600 font-black">${formatRupiah(ord.totalPay)}</span>
-          </div>
         </div>
       `).join('');
     }
