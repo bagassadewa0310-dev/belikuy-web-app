@@ -43,18 +43,18 @@
       <!-- SEARCH BAR & POPULAR KEYWORDS -->
       <div class="flex-1 max-w-2xl">
         <div class="relative flex items-center">
-          <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Cari Samsung, iPhone, ROG Phone, MacBook, Monitor..." class="w-full pl-4 pr-12 py-2 text-xs rounded-lg text-slate-800 outline-none shadow-inner">
+          <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Cari Laptop, HP, PC Desktop, TV Smart..." class="w-full pl-4 pr-12 py-2 text-xs rounded-lg text-slate-800 outline-none shadow-inner">
           <button class="absolute right-1 bg-red-600 hover:bg-red-700 text-white w-8 h-7 rounded-md flex items-center justify-center">
             <i class="fa-solid fa-magnifying-glass text-xs"></i>
           </button>
         </div>
         <!-- Tags di bawah Search Bar -->
         <div class="flex items-center gap-3 text-[10px] text-white/80 mt-1 overflow-x-auto whitespace-nowrap">
+          <span class="cursor-pointer hover:underline" onclick="searchTag('ROG Strix')">ROG Strix</span>
+          <span class="cursor-pointer hover:underline" onclick="searchTag('S25 Ultra')">S25 Ultra</span>
           <span class="cursor-pointer hover:underline" onclick="searchTag('iPhone 16')">iPhone 16</span>
-          <span class="cursor-pointer hover:underline" onclick="searchTag('ROG Phone 9')">ROG Phone 9</span>
-          <span class="cursor-pointer hover:underline" onclick="searchTag('MacBook M4')">MacBook M4</span>
-          <span class="cursor-pointer hover:underline" onclick="searchTag('Galaxy Watch7')">Galaxy Watch7</span>
-          <span class="cursor-pointer hover:underline" onclick="searchTag('Epson EcoTank')">Epson EcoTank</span>
+          <span class="cursor-pointer hover:underline" onclick="searchTag('OLED C4')">OLED C4</span>
+          <span class="cursor-pointer hover:underline" onclick="searchTag('Legion')">Legion</span>
         </div>
       </div>
 
@@ -92,14 +92,15 @@
     <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
       <div class="flex justify-between items-center mb-3">
         <h2 class="font-black text-xs tracking-wider text-slate-800 uppercase">Kategori Pilihan</h2>
-        <a href="#" class="text-red-600 font-semibold text-xs hover:underline">Lihat Semua Kategori</a>
+        <span class="text-red-600 font-semibold text-xs cursor-pointer hover:underline" onclick="filterCategory('semua')">Lihat Semua Kategori</span>
       </div>
       
       <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
         <button onclick="filterCategory('semua')" class="cat-btn bg-red-600 text-white font-bold px-4 py-1.5 rounded-full border border-red-600 whitespace-nowrap">Semua Produk</button>
-        <button onclick="filterCategory('smartphone')" class="cat-btn bg-white text-slate-600 font-medium px-4 py-1.5 rounded-full border border-slate-200 hover:border-red-600 whitespace-nowrap">Smartphone</button>
-        <button onclick="filterCategory('laptop')" class="cat-btn bg-white text-slate-600 font-medium px-4 py-1.5 rounded-full border border-slate-200 hover:border-red-600 whitespace-nowrap">Laptop & PC</button>
-        <button onclick="filterCategory('aksesoris')" class="cat-btn bg-white text-slate-600 font-medium px-4 py-1.5 rounded-full border border-slate-200 hover:border-red-600 whitespace-nowrap">Aksesoris & Wearable</button>
+        <button onclick="filterCategory('laptop')" class="cat-btn bg-white text-slate-600 font-medium px-4 py-1.5 rounded-full border border-slate-200 hover:border-red-600 whitespace-nowrap">Laptop</button>
+        <button onclick="filterCategory('hp')" class="cat-btn bg-white text-slate-600 font-medium px-4 py-1.5 rounded-full border border-slate-200 hover:border-red-600 whitespace-nowrap">HP (Smartphone)</button>
+        <button onclick="filterCategory('pc')" class="cat-btn bg-white text-slate-600 font-medium px-4 py-1.5 rounded-full border border-slate-200 hover:border-red-600 whitespace-nowrap">PC (Desktop)</button>
+        <button onclick="filterCategory('tv')" class="cat-btn bg-white text-slate-600 font-medium px-4 py-1.5 rounded-full border border-slate-200 hover:border-red-600 whitespace-nowrap">TV (Smart TV)</button>
       </div>
     </div>
 
@@ -110,7 +111,7 @@
           <i class="fa-solid fa-fire text-red-600"></i>
           <h2 class="font-black text-sm text-slate-800 tracking-wider uppercase">Daftar Produk</h2>
         </div>
-        <span class="text-xs text-slate-500 font-medium cursor-pointer hover:text-red-600">Semua Produk</span>
+        <span class="text-xs text-slate-500 font-medium cursor-pointer hover:text-red-600" onclick="filterCategory('semua')">Semua Produk</span>
       </div>
 
       <!-- GRID PRODUK -->
@@ -128,7 +129,7 @@
     <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
       <div class="p-3 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white text-xs">
         <div class="flex items-center gap-1 font-semibold text-slate-300">
-          <span id="modalBreadcrumbCat">GADGET</span>
+          <span id="modalBreadcrumbCat">ELEKTRONIK</span>
           <span>/</span>
           <span id="modalBreadcrumbName" class="text-white truncate max-w-xs">Nama Produk</span>
         </div>
@@ -169,7 +170,7 @@
             </div>
 
             <div id="sizeSection" class="space-y-1">
-              <label class="font-bold text-slate-700 block">Pilihan Varian / Memori:</label>
+              <label class="font-bold text-slate-700 block">Pilihan Varian / Garansi:</label>
               <div id="sizeButtonsContainer" class="flex flex-wrap gap-2"></div>
             </div>
 
