@@ -269,50 +269,50 @@
           </div>
         </div>
 
-        <!-- Variasi Warna -->
-        <div class="flex items-start gap-4 text-xs">
-          <span class="text-slate-400 font-semibold w-24 shrink-0 mt-1.5">Warna</span>
-          <div class="flex flex-wrap gap-2" id="colorOptions">
-            <button onclick="selectColor(this)" class="color-btn border-2 border-red-600 bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1">
-              <i class="fa-solid fa-check text-[10px]"></i> Hitam
-            </button>
-            <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-bold text-[11px]">
-              Putih
-            </button>
-            <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-bold text-[11px]">
-              Pink
-            </button>
-            <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-bold text-[11px]">
-              Kuning
-            </button>
-            <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-bold text-[11px]">
-              Biru Muda
-            </button>
-            <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-bold text-[11px]">
-              Hijau
-            </button>
-          </div>
-        </div>
-
-        <!-- Jumlah Kuantitas -->
-        <div class="flex items-center gap-4 text-xs pt-1">
-          <span class="text-slate-400 font-semibold w-24 shrink-0">Kuantitas</span>
-          <div class="flex items-center border border-slate-300 rounded-lg overflow-hidden text-xs">
-            <button onclick="changeDetailQty(-1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200">-</button>
-            <input id="detailQtyInput" type="text" value="1" readonly class="w-10 text-center font-bold bg-transparent text-xs">
-            <button onclick="changeDetailQty(1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200">+</button>
-          </div>
-        </div>
-
-        <!-- Tombol Aksi Beli / Keranjang -->
-        <div class="pt-3 flex items-center gap-3">
-          <button onclick="addDetailToCart()" class="flex-1 bg-red-50 text-red-600 border border-red-500 hover:bg-red-100 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition">
-            <i class="fa-solid fa-cart-plus text-sm"></i> Masukkan Keranjang
+<!-- Variasi Warna -->
+      <div class="flex items-start gap-4 text-xs">
+        <span class="text-slate-400 font-semibold w-24 shrink-0 mt-1.5">Warna</span>
+        <div class="flex flex-wrap gap-2" id="colorOptions">
+          <button onclick="selectColor(this)" class="color-btn border-2 border-red-600 bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1">
+            <i class="fa-solid fa-check text-[10px]"></i> Hitam
           </button>
-          <button onclick="buyNowFromDetail()" class="flex-1 bg-red-600 text-white hover:bg-red-700 py-3 rounded-xl font-bold text-xs shadow-md transition">
-            Beli Sekarang
+          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
+            Putih
+          </button>
+          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
+            Pink
+          </button>
+          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
+            Kuning
+          </button>
+          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
+            Biru Muda
+          </button>
+          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
+            Hijau
           </button>
         </div>
+      </div>
+
+      <!-- Jumlah Kuantitas -->
+      <div class="flex items-center gap-4 text-xs pt-1">
+        <span class="text-slate-400 font-semibold w-24 shrink-0">Kuantitas</span>
+        <div class="flex items-center border border-slate-300 rounded-lg overflow-hidden text-xs">
+          <button onclick="changeDetailQty(-1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200">-</button>
+          <input id="detailQtyInput" type="text" value="1" readonly class="w-10 text-center font-bold bg-transparent text-xs">
+          <button onclick="changeDetailQty(1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200">+</button>
+        </div>
+      </div>
+
+      <!-- Tombol Aksi Beli / Keranjang -->
+      <div class="pt-3 flex items-center gap-3">
+        <button onclick="addDetailToCart()" class="flex-1 bg-red-50 text-red-600 border border-red-500 hover:bg-red-100 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cart-plus text-sm"></i> Masukkan Keranjang
+        </button>
+        <button onclick="buyNowFromDetail()" class="flex-1 bg-red-600 text-white hover:bg-red-700 py-3 rounded-xl font-bold text-xs shadow-md transition">
+          Beli Sekarang
+        </button>
+      </div>
       </div>
     </div>
 
