@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <!-- NAV ICONS & USER PROFILE -->
+      <!-- NAV ICONS & USER PROFILE / AUTH SECTION -->
       <div class="flex items-center gap-5 shrink-0">
         <!-- Wishlist Icon -->
         <button onclick="toggleWishlistModal()" class="relative hover:opacity-80 transition">
@@ -72,13 +72,9 @@
           <span id="cartBadge" class="absolute -top-2 -right-2 bg-yellow-400 text-red-900 font-bold text-[9px] px-1.5 py-0.5 rounded-full">0</span>
         </button>
 
-        <!-- User Profile Dropdown -->
-        <div class="flex items-center gap-2 cursor-pointer hover:bg-red-700 py-1 px-2 rounded-lg transition" onclick="toggleOrdersModal()">
-          <div class="w-7 h-7 bg-white text-red-600 font-bold text-xs rounded-full flex items-center justify-center border border-red-200">
-            BS
-          </div>
-          <span class="text-xs font-semibold">Budi Santoso</span>
-          <i class="fa-solid fa-chevron-down text-[10px]"></i>
+        <!-- Dynamic User Profile & Login / Logout Container -->
+        <div id="authContainer" class="flex items-center">
+          <!-- Rendered dynamically via app.js -->
         </div>
       </div>
 
@@ -87,6 +83,17 @@
 
   <!-- KONTEN UTAMA -->
   <main class="max-w-7xl mx-auto px-4 mt-4 space-y-6">
+
+    <!-- BAR TOMBOL ADMIN (Hanya Muncul Jika Role User = Admin) -->
+    <div id="adminControlBar" class="hidden bg-amber-500/10 border border-amber-400/40 rounded-xl p-3 flex justify-between items-center text-xs">
+      <div class="flex items-center gap-2 text-amber-800 font-bold">
+        <i class="fa-solid fa-user-shield text-base"></i>
+        <span>Panel Admin Seller: Kelola katalog produk marketplace</span>
+      </div>
+      <button onclick="openAdminProductModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-lg shadow transition flex items-center gap-1.5">
+        <i class="fa-solid fa-plus"></i> Tambah Produk Baru
+      </button>
+    </div>
 
     <!-- BANNER / KATEGORI PILIHAN CARD -->
     <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
@@ -116,11 +123,110 @@
 
       <!-- GRID PRODUK -->
       <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-        <!-- Render otomatis via app.js -->
+        <!-- Render otomatis via JS -->
       </div>
     </div>
 
   </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL LOGIN / MASUK DENGAN GMAIL & NAMA -->
+  <!-- ========================================== -->
+  <div id="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
+        <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-right-to-bracket text-red-500"></i> Masuk / Akses Seller</h3>
+        <button onclick="toggleLoginModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <form onsubmit="handleLoginSubmit(event)" class="p-5 space-y-3 text-xs">
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">Nama Lengkap</label>
+          <input type="text" id="loginName" placeholder="Masukkan nama kamu" required class="w-full border border-slate-200 rounded-lg p-2.5 outline-none focus:border-red-600">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">Gmail / No HP</label>
+          <input type="text" id="loginIdentifier" placeholder="contoh@gmail.com / 08123456789" required class="w-full border border-slate-200 rounded-lg p-2.5 outline-none focus:border-red-600">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">Password</label>
+          <input type="password" id="loginPassword" placeholder="Masukkan password" required class="w-full border border-slate-200 rounded-lg p-2.5 outline-none focus:border-red-600">
+        </div>
+        
+        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-md transition text-xs mt-2">
+          LOGIN / MASUK
+        </button>
+
+        <div class="relative flex py-1 items-center">
+            <div class="flex-grow border-t border-slate-200"></div>
+            <span class="flex-shrink mx-2 text-[10px] text-slate-400 font-bold">AKSES CEPAT SELLER</span>
+            <div class="flex-grow border-t border-slate-200"></div>
+        </div>
+
+        <button type="button" onclick="quickLoginSeller()" class="w-full bg-slate-900 hover:bg-black text-amber-400 font-bold py-2.5 rounded-xl text-[11px] transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-user-shield"></i> Login Sebagai Admin Seller
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL ADMIN CRUD (TAMBAH / EDIT PRODUK) -->
+  <!-- ========================================== -->
+  <div id="adminProductModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
+        <h3 id="adminModalTitle" class="font-bold text-sm flex items-center gap-2">
+          <i class="fa-solid fa-box text-amber-400"></i> Tambah Produk Baru
+        </h3>
+        <button onclick="closeAdminProductModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <form id="adminProductForm" onsubmit="handleSaveProduct(event)" class="p-4 overflow-y-auto space-y-3 text-xs">
+        <input type="hidden" id="adminProdId">
+
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">Nama Produk</label>
+          <input type="text" id="adminProdNama" placeholder="Contoh: ROG Strix G16 RTX4080" required class="w-full border border-slate-200 rounded-lg p-2 outline-none focus:border-red-600">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">Kategori</label>
+            <select id="adminProdKategori" required class="w-full border border-slate-200 rounded-lg p-2 outline-none bg-white font-medium">
+              <option value="laptop">Laptop</option>
+              <option value="hp">HP (Smartphone)</option>
+              <option value="pc">PC (Desktop)</option>
+              <option value="tv">TV (Smart TV)</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">Stok Barang</label>
+            <input type="number" id="adminProdStok" placeholder="10" min="0" required class="w-full border border-slate-200 rounded-lg p-2 outline-none focus:border-red-600">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">Harga Normal (Rp)</label>
+            <input type="number" id="adminProdHarga" placeholder="15000000" min="0" required class="w-full border border-slate-200 rounded-lg p-2 outline-none focus:border-red-600">
+          </div>
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">Harga Promo (Optional)</label>
+            <input type="number" id="adminProdHargaDiskon" placeholder="13500000" min="0" class="w-full border border-slate-200 rounded-lg p-2 outline-none focus:border-red-600">
+          </div>
+        </div>
+
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">URL Gambar Produk</label>
+          <input type="url" id="adminProdGambar" placeholder="https://images.unsplash.com/..." required class="w-full border border-slate-200 rounded-lg p-2 outline-none focus:border-red-600">
+        </div>
+
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow-md transition mt-2">
+          Simpan Produk
+        </button>
+      </form>
+    </div>
+  </div>
 
   <!-- ========================================== -->
   <!-- MODAL DETAIL PRODUK -->
@@ -336,7 +442,714 @@
     </div>
   </div>
 
-  <!-- SCRIPT -->
-  <script src="app.js"></script>
+  <!-- ========================================== -->
+  <!-- SCRIPT APLIKASI UTUH (APP.JS INTEGRATED) -->
+  <!-- ========================================== -->
+  <script>
+    // DATA KATALOG LENGKAP BANYAK PRODUK
+    let products = [
+      {
+        id: "p1",
+        name: "ASUS ROG Strix G16 RTX4080 Gaming Laptop",
+        category: "laptop",
+        price: 26999000,
+        originalPrice: 28999000,
+        stok: 5,
+        rating: 4.9,
+        penilaian: 1240,
+        terjual: "1.2RB",
+        isMall: true,
+        sizes: ["Core i7 / 16GB", "Core i9 / 32GB"],
+        images: ["https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "ASUS Official Store" },
+        description: "Laptop gaming gahar dengan layar Nebula Display 240Hz dan GPU NVIDIA RTX 4080."
+      },
+      {
+        id: "p2",
+        name: "Samsung Galaxy S25 Ultra 5G AI",
+        category: "hp",
+        price: 21999000,
+        originalPrice: 23999000,
+        stok: 12,
+        rating: 5.0,
+        penilaian: 4200,
+        terjual: "3.5RB",
+        isMall: true,
+        sizes: ["12GB / 256GB", "12GB / 512GB"],
+        images: ["https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "Samsung Official Store" },
+        description: "Smartphone flagship dengan kamera 200MP, S-Pen terintegrasi, dan Galaxy AI."
+      },
+      {
+        id: "p3",
+        name: "Apple iPhone 16 Pro Max 256GB Titanium",
+        category: "hp",
+        price: 22499000,
+        originalPrice: 24999000,
+        stok: 8,
+        rating: 4.9,
+        penilaian: 3100,
+        terjual: "4.2RB",
+        isMall: true,
+        sizes: ["256GB Natural Titanium", "512GB Desert Titanium"],
+        images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "iBox Official Store" },
+        description: "iPhone terbaru dengan Tombol Camera Control dedicated dan Chipset A18 Pro."
+      },
+      {
+        id: "p4",
+        name: "LG OLED C4 55 Inch Smart TV 4K 144Hz Gaming",
+        category: "tv",
+        price: 18999000,
+        originalPrice: 21999000,
+        stok: 3,
+        rating: 4.8,
+        penilaian: 320,
+        terjual: "450",
+        isMall: true,
+        sizes: ["55 Inch", "65 Inch"],
+        images: ["https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "LG Official Store" },
+        description: "Smart TV OLED dengan warna sempurna hitam murni dan refresh rate 144Hz untuk gaming console."
+      },
+      {
+        id: "p5",
+        name: "Lenovo Legion Pro 5i Core i9 RTX4070",
+        category: "laptop",
+        price: 23499000,
+        originalPrice: 25999000,
+        stok: 6,
+        rating: 4.9,
+        penilaian: 850,
+        terjual: "900+",
+        isMall: true,
+        sizes: ["16GB / 1TB SSD", "32GB / 1TB SSD"],
+        images: ["https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "Lenovo Official Store" },
+        description: "Performa maksimal untuk kreator dan gamer dengan sistem pendingin Legion Coldfront 5.0."
+      },
+      {
+        id: "p6",
+        name: "PC Gaming Desktop Core i7 RTX 4070 Ti Super 32GB",
+        category: "pc",
+        price: 19500000,
+        originalPrice: 21000000,
+        stok: 4,
+        rating: 4.8,
+        penilaian: 410,
+        terjual: "300+",
+        isMall: false,
+        sizes: ["Paket PC Only", "Paket Fullset Monitor 240Hz"],
+        images: ["https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "Custom Rig Indonesia" },
+        description: "PC Desktop rakitan khusus gaming berat & render video 4K dengan casing tempered glass RGB."
+      },
+      {
+        id: "p7",
+        name: "Xiaomi Google Smart TV A Pro 43 Inch 4K UHD",
+        category: "tv",
+        price: 3499000,
+        originalPrice: 3999000,
+        stok: 15,
+        rating: 4.7,
+        penilaian: 5200,
+        terjual: "8.1RB",
+        isMall: true,
+        sizes: ["43 Inch", "50 Inch"],
+        images: ["https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "Xiaomi Official Store" },
+        description: "Smart TV Google TV murah dengan bezel tipis metallic frame dan Dolby Audio."
+      },
+      {
+        id: "p8",
+        name: "MacBook Pro M3 Max 16 Inch 36GB / 1TB",
+        category: "laptop",
+        price: 38999000,
+        originalPrice: 41999000,
+        stok: 3,
+        rating: 5.0,
+        penilaian: 290,
+        terjual: "500+",
+        isMall: true,
+        sizes: ["Space Black", "Silver"],
+        images: ["https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80"],
+        store: { name: "Apple Authorized Reseller" },
+        description: "Laptop kencang kelas profesional dengan layar Liquid Retina XDR dan baterai awet hingga 22 jam."
+      }
+    ];
+
+    // AKUN USER TERDAFTAR
+    const registeredUsers = [
+      {
+        id: "u_admin",
+        name: "Admin Seller BeliKuy",
+        gmail: "admin@belikuy.com",
+        phone: "08123456789",
+        pass: "admin123",
+        role: "admin", // Memiliki akses CRUD Seller
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+      }
+    ];
+
+    let currentUser = null;
+
+    // STATE UTAMA
+    let cart = [];
+    let wishlist = [];
+    let orders = [];
+    let currentCategory = 'semua';
+    let searchQuery = '';
+    let selectedProductId = null;
+    let selectedSize = null;
+    let selectedQty = 1;
+
+    // FORMAT RUPIAH
+    function formatRupiah(num) {
+      return 'Rp' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // AUTH HEADER SYSTEM
+    function renderAuthHeader() {
+      const container = document.getElementById('authContainer');
+      const adminBar = document.getElementById('adminControlBar');
+      if (!container) return;
+
+      if (currentUser) {
+        container.innerHTML = `
+          <div class="flex items-center gap-2 bg-red-700/80 p-1 px-2.5 rounded-full border border-red-500/40">
+            <img src="${currentUser.avatar}" class="w-6 h-6 rounded-full object-cover border border-white">
+            <div class="text-[10px] leading-tight hidden sm:block">
+              <div class="font-bold flex items-center gap-1">
+                <span>${currentUser.name}</span>
+                <span class="bg-${currentUser.role === 'admin' ? 'yellow-400 text-red-900' : 'blue-400 text-white'} font-extrabold px-1 rounded text-[8px] uppercase">${currentUser.role}</span>
+              </div>
+            </div>
+            <button onclick="handleLogout()" class="ml-1 text-white/80 hover:text-white p-1 text-xs" title="Keluar">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+          </div>
+        `;
+
+        if (adminBar) {
+          if (currentUser.role === 'admin') adminBar.classList.remove('hidden');
+          else adminBar.classList.add('hidden');
+        }
+      } else {
+        container.innerHTML = `
+          <button onclick="toggleLoginModal()" class="bg-white text-red-600 font-bold px-3 py-1 rounded-lg text-xs shadow hover:bg-slate-50 transition flex items-center gap-1">
+            <i class="fa-solid fa-right-to-bracket"></i> Masuk
+          </button>
+        `;
+        if (adminBar) adminBar.classList.add('hidden');
+      }
+    }
+
+    function toggleLoginModal() {
+      const modal = document.getElementById('loginModal');
+      if (modal) modal.classList.toggle('hidden');
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const inputName = document.getElementById('loginName').value.trim();
+      const inputId = document.getElementById('loginIdentifier').value.trim().toLowerCase();
+      const inputPass = document.getElementById('loginPassword').value.trim();
+
+      const foundUser = registeredUsers.find(u => 
+        (u.gmail.toLowerCase() === inputId || u.phone === inputId) && u.pass === inputPass
+      );
+
+      if (foundUser) {
+        currentUser = foundUser;
+        alert(`Berhasil Login Admin Seller!\nSelamat datang, ${currentUser.name}`);
+      } else {
+        currentUser = {
+          id: "u_" + Date.now(),
+          name: inputName || "Pengguna BeliKuy",
+          gmail: inputId,
+          role: "user",
+          avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80"
+        };
+        alert(`Masuk sebagai Pembeli:\nNama: ${currentUser.name}\nGmail/No HP: ${currentUser.gmail}`);
+      }
+
+      toggleLoginModal();
+      renderAuthHeader();
+      renderProducts();
+    }
+
+    function quickLoginSeller() {
+      currentUser = registeredUsers.find(u => u.role === 'admin');
+      alert("🎉 Akun Seller Aktif!\nAnda sekarang dapat menambah, mengedit, dan menghapus produk.");
+      toggleLoginModal();
+      renderAuthHeader();
+      renderProducts();
+    }
+
+    function handleLogout() {
+      if (confirm("Yakin ingin keluar akun?")) {
+        currentUser = null;
+        renderAuthHeader();
+        renderProducts();
+      }
+    }
+
+    // PROTEKSI AKSES CRUD
+    function checkSellerAuth(actionCallback) {
+      if (!currentUser || currentUser.role !== 'admin') {
+        alert("⛔ Akses Ditolak!\nFitur ini khusus untuk Admin Seller. Silakan login dengan akun Seller.");
+        toggleLoginModal();
+        return false;
+      }
+      if (typeof actionCallback === 'function') actionCallback();
+      return true;
+    }
+
+    // KATALOG PRODUK RENDER
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      if (!grid) return;
+
+      const filtered = products.filter(p => {
+        const matchCat = currentCategory === 'semua' || p.category.toLowerCase() === currentCategory.toLowerCase();
+        const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 space-y-2">
+            <i class="fa-solid fa-box-open text-4xl mb-2"></i>
+            <p class="font-bold text-xs">Produk tidak ditemukan</p>
+          </div>`;
+        return;
+      }
+
+      const isAdmin = currentUser && currentUser.role === 'admin';
+
+      grid.innerHTML = filtered.map(p => {
+        const isWish = wishlist.includes(p.id);
+
+        return `
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden group flex flex-col justify-between cursor-pointer relative" onclick="openProductDetail('${p.id}')">
+            <div>
+              <div class="relative overflow-hidden aspect-square bg-slate-50">
+                <img src="${p.images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                ${p.isMall ? `<span class="absolute top-2 left-2 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded">Mall</span>` : ''}
+                <button onclick="event.stopPropagation(); toggleWishlist('${p.id}');" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/80 flex items-center justify-center text-slate-600 hover:text-red-600 transition shadow">
+                  <i class="${isWish ? 'fa-solid text-red-600' : 'fa-regular'} fa-heart text-[11px]"></i>
+                </button>
+              </div>
+
+              <div class="p-2.5 space-y-1.5">
+                <h3 class="font-medium text-xs text-slate-800 line-clamp-2 leading-snug">${p.name}</h3>
+                <div>
+                  <div class="font-black text-xs text-red-600">${formatRupiah(p.price)}</div>
+                  ${p.originalPrice ? `<div class="text-[10px] text-slate-400 line-through">${formatRupiah(p.originalPrice)}</div>` : ''}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-2.5 pt-0">
+              <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-50">
+                <div class="flex items-center gap-1 text-amber-500 font-bold">
+                  <i class="fa-solid fa-star text-[9px]"></i>
+                  <span>${p.rating}</span>
+                </div>
+                <span>Terjual ${p.terjual}</span>
+              </div>
+
+              ${isAdmin ? `
+                <div class="flex gap-1.5 pt-2 border-t border-slate-100 mt-2" onclick="event.stopPropagation();">
+                  <button onclick="openAdminProductModal('${p.id}')" class="flex-1 bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold py-1 rounded text-[10px] border border-amber-200">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                  </button>
+                  <button onclick="deleteProduct('${p.id}')" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 font-bold py-1 rounded text-[10px] border border-red-200">
+                    <i class="fa-solid fa-trash"></i> Hapus
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      renderProducts();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      renderProducts();
+    }
+
+    function searchTag(tag) {
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) searchInput.value = tag;
+      handleSearch(tag);
+    }
+
+    // DETAIL PRODUK
+    function openProductDetail(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      selectedProductId = id;
+      selectedQty = 1;
+      selectedSize = product.sizes ? product.sizes[0] : null;
+
+      document.getElementById('modalBreadcrumbCat').innerText = product.category.toUpperCase();
+      document.getElementById('modalBreadcrumbName').innerText = product.name;
+      document.getElementById('detailTitle').innerText = product.name;
+      document.getElementById('detailRating').innerText = product.rating;
+      document.getElementById('detailPenilaian').innerText = product.penilaian;
+      document.getElementById('detailTerjual').innerText = product.terjual;
+      document.getElementById('detailPrice').innerText = formatRupiah(product.price);
+      document.getElementById('detailDescription').innerText = product.description;
+      document.getElementById('detailStoreName').innerText = product.store.name;
+      document.getElementById('detailMainImg').src = product.images[0];
+      document.getElementById('detailQtyInput').value = selectedQty;
+
+      if (product.originalPrice) {
+        document.getElementById('detailOriginalPrice').innerText = formatRupiah(product.originalPrice);
+        const disc = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+        document.getElementById('detailDiscountBadge').innerText = `-${disc}%`;
+      }
+
+      const sizeContainer = document.getElementById('sizeButtonsContainer');
+      if (product.sizes && product.sizes.length > 0) {
+        sizeContainer.innerHTML = product.sizes.map(s => `
+          <button onclick="selectSize('${s}')" class="size-btn px-2.5 py-1 text-xs border rounded-lg font-semibold transition ${s === selectedSize ? 'border-red-600 text-red-600 bg-red-50' : 'border-slate-200 text-slate-600'}">${s}</button>
+        `).join('');
+      }
+
+      document.getElementById('productDetailModal').classList.remove('hidden');
+    }
+
+    function closeProductDetailModal() {
+      document.getElementById('productDetailModal').classList.add('hidden');
+    }
+
+    function selectSize(size) {
+      selectedSize = size;
+      document.querySelectorAll('.size-btn').forEach(btn => {
+        if (btn.innerText === size) btn.className = "size-btn px-2.5 py-1 text-xs border rounded-lg font-semibold transition border-red-600 text-red-600 bg-red-50";
+        else btn.className = "size-btn px-2.5 py-1 text-xs border rounded-lg font-semibold transition border-slate-200 text-slate-600";
+      });
+    }
+
+    function changeDetailQty(amount) {
+      selectedQty = Math.max(1, selectedQty + amount);
+      document.getElementById('detailQtyInput').value = selectedQty;
+    }
+
+    // CART & CHECKOUT
+    function addDetailToCart() {
+      if (selectedProductId) {
+        addToCart(selectedProductId, selectedQty, selectedSize);
+        closeProductDetailModal();
+      }
+    }
+
+    function buyNowFromDetail() {
+      addDetailToCart();
+      toggleCartModal();
+    }
+
+    function addToCart(id, qty = 1, size = null) {
+      const existing = cart.find(item => item.id === id && item.size === size);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        const product = products.find(p => p.id === id);
+        cart.push({ ...product, qty, size });
+      }
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const badge = document.getElementById('cartBadge');
+      if (!badge) return;
+      const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+      badge.innerText = totalQty;
+    }
+
+    function toggleCartModal() {
+      const modal = document.getElementById('cartModal');
+      if (!modal) return;
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) renderCartItems();
+    }
+
+    function renderCartItems() {
+      const container = document.getElementById('cartItemsList');
+      if (!container) return;
+
+      if (cart.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-400 space-y-2"><i class="fa-solid fa-cart-flatbed text-4xl mb-2"></i><p class="font-bold text-xs">Keranjangmu masih kosong</p></div>`;
+        calculateCartTotals();
+        return;
+      }
+
+      container.innerHTML = cart.map((item, idx) => `
+        <div class="flex items-center gap-3 p-2.5 border border-slate-200 rounded-xl bg-white">
+          <img src="${item.images[0]}" class="w-12 h-12 object-cover rounded-lg border">
+          <div class="flex-1 min-w-0">
+            <h4 class="font-bold text-xs text-slate-800 truncate">${item.name}</h4>
+            <p class="font-black text-xs text-red-600">${formatRupiah(item.price)}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex items-center border border-slate-200 rounded-lg overflow-hidden text-xs">
+              <button onclick="updateCartQty(${idx}, -1)" class="px-2 py-0.5 bg-slate-100 font-bold">-</button>
+              <span class="px-2 font-bold text-xs">${item.qty}</span>
+              <button onclick="updateCartQty(${idx}, 1)" class="px-2 py-0.5 bg-slate-100 font-bold">+</button>
+            </div>
+            <button onclick="removeFromCart(${idx})" class="text-slate-400 hover:text-red-600 text-xs p-1"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+      `).join('');
+
+      calculateCartTotals();
+    }
+
+    function updateCartQty(idx, amount) {
+      cart[idx].qty += amount;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      updateCartBadge();
+      renderCartItems();
+    }
+
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      updateCartBadge();
+      renderCartItems();
+    }
+
+    function calculateCartTotals() {
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      let ongkir = cart.length > 0 ? 15000 : 0;
+      let total = subtotal + ongkir;
+
+      if (document.getElementById('subtotalText')) document.getElementById('subtotalText').innerText = formatRupiah(subtotal);
+      if (document.getElementById('ongkirText')) document.getElementById('ongkirText').innerText = formatRupiah(ongkir);
+      if (document.getElementById('totalPayText')) document.getElementById('totalPayText').innerText = formatRupiah(total);
+
+      return total;
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) return alert("Keranjang kosong!");
+      toggleCartModal();
+      document.getElementById('checkoutTotalPay').innerText = formatRupiah(calculateCartTotals());
+      toggleCheckoutModal();
+    }
+
+    function toggleCheckoutModal() {
+      const modal = document.getElementById('checkoutModal');
+      if (modal) modal.classList.toggle('hidden');
+    }
+
+    function processCheckoutOrder(e) {
+      e.preventDefault();
+      if (cart.length === 0) return;
+
+      const total = calculateCartTotals();
+      const newOrder = {
+        id: "INV/" + Date.now().toString().slice(-8),
+        date: new Date().toLocaleDateString('id-ID'),
+        items: JSON.parse(JSON.stringify(cart)),
+        totalPay: total,
+        user: currentUser ? currentUser.name : "Pembeli Anonim",
+        status: "Diproses Seller"
+      };
+
+      orders.unshift(newOrder);
+      cart = [];
+      updateCartBadge();
+      toggleCheckoutModal();
+      alert(`🎉 Pesanan Berhasil Dibuat!\nNo Invoice: ${newOrder.id}`);
+      toggleOrdersModal();
+    }
+
+    // WISHLIST & ORDERS
+    function toggleWishlist(id) {
+      const idx = wishlist.indexOf(id);
+      if (idx > -1) wishlist.splice(idx, 1);
+      else wishlist.push(id);
+      updateWishlistBadge();
+      renderProducts();
+    }
+
+    function updateWishlistBadge() {
+      const badge = document.getElementById('wishlistBadge');
+      if (!badge) return;
+      badge.innerText = wishlist.length;
+      if (wishlist.length > 0) badge.classList.remove('hidden');
+      else badge.classList.add('hidden');
+    }
+
+    function toggleWishlistModal() {
+      const modal = document.getElementById('wishlistModal');
+      if (modal) {
+        modal.classList.toggle('hidden');
+        if (!modal.classList.contains('hidden')) renderWishlistItems();
+      }
+    }
+
+    function renderWishlistItems() {
+      const container = document.getElementById('wishlistItemsList');
+      if (!container) return;
+      if (wishlist.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-400 space-y-2"><i class="fa-solid fa-heart-crack text-4xl mb-2"></i><p class="font-bold text-xs">Wishlist masih kosong</p></div>`;
+        return;
+      }
+      const wishProducts = products.filter(p => wishlist.includes(p.id));
+      container.innerHTML = wishProducts.map(p => `
+        <div class="flex items-center justify-between p-2.5 border border-slate-200 rounded-xl bg-white">
+          <div class="flex items-center gap-3">
+            <img src="${p.images[0]}" class="w-10 h-10 object-cover rounded-lg border">
+            <div>
+              <h4 class="font-bold text-xs text-slate-800">${p.name}</h4>
+              <p class="font-black text-xs text-red-600">${formatRupiah(p.price)}</p>
+            </div>
+          </div>
+          <button onclick="toggleWishlist('${p.id}'); renderWishlistItems();" class="text-slate-400 hover:text-red-600 text-xs p-1"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      `).join('');
+    }
+
+    function toggleOrdersModal() {
+      const modal = document.getElementById('ordersModal');
+      if (modal) {
+        modal.classList.toggle('hidden');
+        if (!modal.classList.contains('hidden')) renderOrdersItems();
+      }
+    }
+
+    function renderOrdersItems() {
+      const container = document.getElementById('ordersListContainer');
+      if (!container) return;
+      if (orders.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-400 space-y-2"><i class="fa-solid fa-receipt text-4xl mb-2"></i><p class="font-bold text-xs">Belum ada riwayat transaksi</p></div>`;
+        return;
+      }
+      container.innerHTML = orders.map(ord => `
+        <div class="border border-slate-200 rounded-xl p-3 bg-white space-y-2 text-xs shadow-sm">
+          <div class="flex justify-between items-center border-b pb-2">
+            <span class="font-black text-slate-800">${ord.id}</span>
+            <span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2 py-0.5 rounded-full">${ord.status}</span>
+          </div>
+          <div class="flex justify-between items-center pt-1">
+            <span class="text-slate-500">Total Pembayaran:</span>
+            <span class="text-red-600 font-black">${formatRupiah(ord.totalPay)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ADMIN SELLER CRUD SYSTEM
+    function openAdminProductModal(prodId = null) {
+      checkSellerAuth(() => {
+        const modal = document.getElementById('adminProductModal');
+        const form = document.getElementById('adminProductForm');
+        const title = document.getElementById('adminModalTitle');
+        if (!modal || !form) return;
+
+        form.reset();
+
+        if (prodId) {
+          const p = products.find(item => item.id === prodId);
+          if (!p) return;
+          title.innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-400"></i> Edit Produk: ${p.name}`;
+          document.getElementById('adminProdId').value = p.id;
+          document.getElementById('adminProdNama').value = p.name;
+          document.getElementById('adminProdKategori').value = p.category;
+          document.getElementById('adminProdStok').value = p.stok || 10;
+          document.getElementById('adminProdHarga').value = p.price;
+          document.getElementById('adminProdHargaDiskon').value = p.originalPrice || '';
+          document.getElementById('adminProdGambar').value = p.images[0];
+        } else {
+          title.innerHTML = `<i class="fa-solid fa-box text-amber-400"></i> Tambah Produk Baru`;
+          document.getElementById('adminProdId').value = '';
+        }
+
+        modal.classList.remove('hidden');
+      });
+    }
+
+    function closeAdminProductModal() {
+      const modal = document.getElementById('adminProductModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handleSaveProduct(e) {
+      e.preventDefault();
+      if (!checkSellerAuth()) return;
+
+      const id = document.getElementById('adminProdId').value;
+      const name = document.getElementById('adminProdNama').value.trim();
+      const category = document.getElementById('adminProdKategori').value;
+      const stok = parseInt(document.getElementById('adminProdStok').value) || 0;
+      const price = parseInt(document.getElementById('adminProdHarga').value) || 0;
+      const originalPriceVal = document.getElementById('adminProdHargaDiskon').value;
+      const originalPrice = originalPriceVal ? parseInt(originalPriceVal) : null;
+      const image = document.getElementById('adminProdGambar').value.trim();
+
+      if (id) {
+        const idx = products.findIndex(p => p.id === id);
+        if (idx > -1) {
+          products[idx].name = name;
+          products[idx].category = category;
+          products[idx].stok = stok;
+          products[idx].price = price;
+          products[idx].originalPrice = originalPrice;
+          products[idx].images[0] = image;
+          alert("Produk berhasil diperbarui!");
+        }
+      } else {
+        const newProduct = {
+          id: "p_" + Date.now(),
+          name: name,
+          category: category,
+          stok: stok,
+          price: price,
+          originalPrice: originalPrice,
+          rating: 5.0,
+          penilaian: 0,
+          terjual: "0",
+          isMall: true,
+          sizes: ["Garansi Resmi 1 Tahun"],
+          images: [image],
+          store: { name: currentUser ? currentUser.name : "Admin Store" },
+          description: "Produk ditambahkan via Panel Admin Seller BeliKuy."
+        };
+        products.unshift(newProduct);
+        alert("Produk baru berhasil ditambahkan ke katalog!");
+      }
+
+      closeAdminProductModal();
+      renderProducts();
+    }
+
+    function deleteProduct(id) {
+      checkSellerAuth(() => {
+        if (confirm("Apakah Anda yakin ingin menghapus produk ini dari katalog?")) {
+          products = products.filter(p => p.id !== id);
+          renderProducts();
+          alert("Produk berhasil dihapus!");
+        }
+      });
+    }
+
+    // INITIALIZATION
+    document.addEventListener("DOMContentLoaded", () => {
+      renderAuthHeader();
+      renderProducts();
+      updateCartBadge();
+      updateWishlistBadge();
+    });
+  </script>
 </body>
 </html>
