@@ -154,168 +154,173 @@
     </div>
   </main>
 
- <!-- MODAL DETAIL PRODUK (DESAIN MODEL SHOPEE LENGKAP) -->
-<div id="productDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
-  <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative p-4 sm:p-6 space-y-6 text-slate-800">
-    <!-- Tombol Close -->
-    <button onclick="closeProductDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 z-10">
+<!-- MODAL DETAIL PRODUK -->
+<div id="productDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+  <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative p-6 sm:p-8 animate-fade-in">
+    
+    <!-- Tombol Close (X) -->
+    <button onclick="closeProductDetailModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition p-2 rounded-full hover:bg-slate-100">
       <i class="fa-solid fa-xmark text-xl"></i>
     </button>
 
-    <!-- Breadcrumb -->
-    <div class="text-[11px] text-slate-400 font-semibold space-x-1">
-      <span id="modalBreadcrumbCat">Kategori</span><span>/</span><span id="modalBreadcrumbName" class="text-slate-600 truncate">Nama Produk</span>
+    <!-- Breadcrumb Navigasi -->
+    <div class="text-xs text-slate-400 font-medium mb-4 flex items-center gap-1.5">
+      <span id="modalBreadcrumbCat">Smartphone</span>
+      <span>/</span>
+      <span id="modalBreadcrumbName" class="text-slate-600 font-semibold truncate">Samsung Galaxy A56 5G</span>
     </div>
 
-    <!-- MAIN PRODUCT SECTION -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <!-- Layout Grid 2 Kolom (Gambar & Info) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
       
-      <!-- KIRI: Gambar Produk & Thumbnail + Social Share -->
-      <div class="md:col-span-5 space-y-3">
-        <div class="w-full h-64 sm:h-72 bg-slate-100 rounded-xl overflow-hidden border border-slate-200 relative group">
-          <img id="detailMainImg" src="" class="w-full h-full object-cover">
-          <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded shadow">Star+</span>
+      <!-- KOLOM KIRI: GAMBAR PRODUK & GALERI -->
+      <div class="md:col-span-5 space-y-4">
+        <!-- Gambar Utama -->
+        <div class="w-full h-80 bg-slate-100 rounded-2xl overflow-hidden relative border border-slate-100 group shadow-sm">
+          <img id="detailMainImg" src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500" alt="Detail Produk" class="w-full h-full object-cover">
+          <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded shadow">Star+</span>
         </div>
 
-        <!-- Mini Gallery / Thumbnails Dummy -->
-        <div class="grid grid-cols-5 gap-1.5">
-          <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=150&auto=format&fit=crop&q=80" class="w-full h-12 object-cover rounded-lg border-2 border-red-500 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&auto=format&fit=crop&q=80" class="w-full h-12 object-cover rounded-lg border border-slate-200 opacity-70 hover:opacity-100 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&auto=format&fit=crop&q=80" class="w-full h-12 object-cover rounded-lg border border-slate-200 opacity-70 hover:opacity-100 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=150&auto=format&fit=crop&q=80" class="w-full h-12 object-cover rounded-lg border border-slate-200 opacity-70 hover:opacity-100 cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=150&auto=format&fit=crop&q=80" class="w-full h-12 object-cover rounded-lg border border-slate-200 opacity-70 hover:opacity-100 cursor-pointer">
+        <!-- Thumbnail Galeri Gambar -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1">
+          <button type="button" onclick="document.getElementById('detailMainImg').src=this.querySelector('img').src" class="w-14 h-14 rounded-xl overflow-hidden border-2 border-red-500 shrink-0 focus:border-red-600">
+            <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=150" class="w-full h-full object-cover">
+          </button>
+          <button type="button" onclick="document.getElementById('detailMainImg').src=this.querySelector('img').src" class="w-14 h-14 rounded-xl overflow-hidden border border-slate-200 shrink-0 hover:border-slate-400">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150" class="w-full h-full object-cover">
+          </button>
+          <button type="button" onclick="document.getElementById('detailMainImg').src=this.querySelector('img').src" class="w-14 h-14 rounded-xl overflow-hidden border border-slate-200 shrink-0 hover:border-slate-400">
+            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=150" class="w-full h-full object-cover">
+          </button>
+          <button type="button" onclick="document.getElementById('detailMainImg').src=this.querySelector('img').src" class="w-14 h-14 rounded-xl overflow-hidden border border-slate-200 shrink-0 hover:border-slate-400">
+            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=150" class="w-full h-full object-cover">
+          </button>
+          <button type="button" onclick="document.getElementById('detailMainImg').src=this.querySelector('img').src" class="w-14 h-14 rounded-xl overflow-hidden border border-slate-200 shrink-0 hover:border-slate-400">
+            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150" class="w-full h-full object-cover">
+          </button>
         </div>
 
         <!-- Share & Favorit -->
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
-          <div class="flex items-center gap-2 text-slate-500">
+        <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-2">
             <span>Share:</span>
-            <a href="#" class="text-blue-600 hover:opacity-80"><i class="fa-brands fa-facebook-messenger text-base"></i></a>
-            <a href="#" class="text-blue-500 hover:opacity-80"><i class="fa-brands fa-facebook text-base"></i></a>
-            <a href="#" class="text-pink-600 hover:opacity-80"><i class="fa-brands fa-pinterest text-base"></i></a>
-            <a href="#" class="text-slate-800 hover:opacity-80"><i class="fa-brands fa-x-twitter text-base"></i></a>
+            <button class="text-blue-600 hover:opacity-80"><i class="fa-brands fa-facebook text-base"></i></button>
+            <button class="text-sky-500 hover:opacity-80"><i class="fa-brands fa-twitter text-base"></i></button>
+            <button class="text-pink-600 hover:opacity-80"><i class="fa-brands fa-pinterest text-base"></i></button>
           </div>
-          <button onclick="toggleWishlistFromDetail()" class="text-red-500 font-bold flex items-center gap-1 hover:opacity-80">
-            <i id="detailHeartIcon" class="fa-regular fa-heart"></i>
-            <span id="detailFavoritText">Favorit (12,1RB)</span>
+          <button class="flex items-center gap-1.5 text-red-500 font-bold hover:text-red-600">
+            <i class="fa-regular fa-heart text-base"></i> Favorit
           </button>
         </div>
       </div>
 
-      <!-- KANAN: Detail Informasi Produk & Pembelian -->
+      <!-- KOLOM KANAN: RINCIAN PRODUK & OPSI -->
       <div class="md:col-span-7 space-y-4">
-        <!-- Judul & Badge -->
-        <div>
-          <h2 class="font-bold text-base sm:text-lg text-slate-900 leading-snug flex items-start gap-1.5">
-            <span class="bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded mt-0.5 shrink-0">Star+</span>
-            <span id="detailTitle">Nama Produk</span>
+        
+        <!-- Judul & Badge Star+ -->
+        <div class="space-y-2">
+          <h2 class="text-lg md:text-xl font-bold text-slate-900 leading-snug flex items-start gap-2">
+            <span class="bg-red-600 text-white text-[10px] font-black px-1.5 py-0.5 rounded mt-0.5 shrink-0">Star+</span>
+            <span id="detailTitle">Samsung Galaxy A56 5G</span>
           </h2>
-          
+
           <!-- Rating & Penilaian -->
-          <div class="flex items-center justify-between mt-2 text-xs">
-            <div class="flex items-center gap-3">
-              <div class="flex items-center gap-1 font-extrabold text-amber-500">
-                <span id="detailRating">4.5</span>
-                <i class="fa-solid fa-star text-xs"></i>
-                <i class="fa-solid fa-star text-xs"></i>
-                <i class="fa-solid fa-star text-xs"></i>
-                <i class="fa-solid fa-star text-xs"></i>
-                <i class="fa-solid fa-star-half-stroke text-xs"></i>
+          <div class="flex items-center gap-4 text-xs">
+            <div class="flex items-center gap-1 text-amber-500 font-extrabold">
+              <span id="detailRating">4.8</span>
+              <div class="flex text-amber-400 text-[11px]">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
               </div>
-              <span class="text-slate-300">|</span>
-              <span class="text-slate-500"><b id="detailPenilaian" class="text-slate-800">50RB</b> Penilaian</span>
-              <span class="text-slate-300">|</span>
-              <span class="text-slate-500"><b id="detailTerjual" class="text-slate-800">100+</b> Terjual</span>
             </div>
-            <button class="text-slate-400 hover:text-slate-600 text-[11px]">Laporkan</button>
+            <span class="text-slate-300">|</span>
+            <span class="text-slate-600"><strong class="text-slate-900">620</strong> Penilaian</span>
+            <span class="text-slate-300">|</span>
+            <span class="text-slate-600"><strong class="text-slate-900">1.5RB</strong> Terjual</span>
+            <button class="ml-auto text-slate-400 hover:text-slate-600 text-[11px]">Laporkan</button>
           </div>
         </div>
 
-        <!-- Harga & Diskon -->
-        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 flex items-baseline gap-2">
-          <span id="detailPrice" class="text-2xl font-black text-red-600">Rp25.290</span>
-          <span id="detailOriginalPrice" class="text-xs text-slate-400 line-through">Rp119.600</span>
-          <span id="detailDiscountBadge" class="text-[10px] bg-red-100 text-red-600 font-bold px-1.5 py-0.5 rounded">-79%</span>
+        <!-- Box Harga & Diskon -->
+        <div class="bg-slate-50 p-4 rounded-2xl flex items-baseline gap-3 border border-slate-100">
+          <span id="detailPrice" class="text-2xl font-black text-red-600">Rp5.999.000</span>
+          <span class="text-xs text-slate-400 line-through font-semibold">Rp7.999.000</span>
+          <span class="bg-red-100 text-red-600 font-extrabold text-[10px] px-1.5 py-0.5 rounded">-25%</span>
         </div>
 
         <!-- Voucher Toko -->
         <div class="flex items-center gap-4 text-xs">
-          <span class="text-slate-400 font-semibold w-24 shrink-0">Voucher Toko</span>
-          <div class="flex gap-2">
-            <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-extrabold px-2 py-0.5 rounded">POTONGAN Rp1RB</span>
-          </div>
+          <span class="text-slate-400 font-semibold w-20 shrink-0">Voucher Toko</span>
+          <span class="bg-red-50 text-red-600 border border-red-200 font-bold px-2 py-0.5 rounded text-[10px]">POTONGAN Rp1RB</span>
         </div>
 
-        <!-- Informasi Pengiriman -->
+        <!-- Pengiriman -->
         <div class="flex items-start gap-4 text-xs">
-          <span class="text-slate-400 font-semibold w-24 shrink-0 mt-0.5">Pengiriman</span>
+          <span class="text-slate-400 font-semibold w-20 shrink-0 mt-0.5">Pengiriman</span>
           <div class="space-y-1">
             <div class="flex items-center gap-1.5 font-bold text-slate-700">
               <i class="fa-solid fa-truck-fast text-teal-600"></i>
               <span>Garansi tiba 31 Jul - 1 Ags</span>
-              <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+              <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 ml-1"></i>
             </div>
-            <p class="text-[10px] text-slate-500">Dapatkan Voucher s/d Rp10.000 jika pesanan terlambat.</p>
+            <p class="text-[10px] text-slate-400">Dapatkan Voucher s/d Rp10.000 jika pesanan terlambat.</p>
           </div>
         </div>
 
-        <!-- Jaminan / COD -->
+        <!-- Jaminan -->
         <div class="flex items-center gap-4 text-xs">
-          <span class="text-slate-400 font-semibold w-24 shrink-0">Jaminan</span>
-          <div class="flex items-center gap-1 text-slate-700 font-semibold text-[11px]">
+          <span class="text-slate-400 font-semibold w-20 shrink-0">Jaminan</span>
+          <div class="flex items-center gap-1 text-slate-700 font-semibold">
             <i class="fa-solid fa-shield-halved text-red-500"></i>
             <span>Bebas Pengembalian • COD-Cek Dulu</span>
-            <i class="fa-solid fa-chevron-down text-[9px] text-slate-400 ml-1"></i>
+            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 ml-1"></i>
           </div>
         </div>
 
-<!-- Variasi Warna -->
-      <div class="flex items-start gap-4 text-xs">
-        <span class="text-slate-400 font-semibold w-24 shrink-0 mt-1.5">Warna</span>
-        <div class="flex flex-wrap gap-2" id="colorOptions">
-          <button onclick="selectColor(this)" class="color-btn border-2 border-red-600 bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1">
-            <i class="fa-solid fa-check text-[10px]"></i> Hitam
+        <!-- Opsi Warna -->
+        <div class="flex items-start gap-4 text-xs pt-1">
+          <span class="text-slate-400 font-semibold w-20 shrink-0 mt-1.5">Warna</span>
+          <div id="colorOptions" class="flex flex-wrap gap-2">
+            <button type="button" onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 font-medium px-3 py-1.5 rounded-lg text-[11px]">Hitam</button>
+            <button type="button" onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 font-medium px-3 py-1.5 rounded-lg text-[11px]">Putih</button>
+            <button type="button" onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 font-medium px-3 py-1.5 rounded-lg text-[11px]">Pink</button>
+            <button type="button" onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 font-medium px-3 py-1.5 rounded-lg text-[11px]">Kuning</button>
+            <button type="button" onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 font-medium px-3 py-1.5 rounded-lg text-[11px]">Biru Muda</button>
+            <button type="button" onclick="selectColor(this)" class="color-btn border-2 border-red-600 bg-red-50 text-red-600 font-bold px-3 py-1.5 rounded-lg text-[11px] flex items-center gap-1">
+              <i class="fa-solid fa-check text-[10px]"></i> Hijau
+            </button>
+          </div>
+        </div>
+
+        <!-- Jumlah Kuantitas -->
+        <div class="flex items-center gap-4 text-xs pt-1">
+          <span class="text-slate-400 font-semibold w-20 shrink-0">Kuantitas</span>
+          <div class="flex items-center border border-slate-300 rounded-lg overflow-hidden text-xs bg-white">
+            <button type="button" onclick="changeDetailQty(-1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200 transition">-</button>
+            <input id="detailQtyInput" type="text" value="1" readonly class="w-10 text-center font-bold bg-transparent text-xs focus:outline-none">
+            <button type="button" onclick="changeDetailQty(1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200 transition">+</button>
+          </div>
+        </div>
+
+        <!-- Tombol Aksi Beli / Keranjang -->
+        <div class="pt-4 flex items-center gap-3">
+          <button type="button" onclick="addDetailToCart()" class="flex-1 bg-red-50 text-red-600 border border-red-500 hover:bg-red-100 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition shadow-sm">
+            <i class="fa-solid fa-cart-plus text-sm"></i> Masukkan Keranjang
           </button>
-          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
-            Putih
-          </button>
-          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
-            Pink
-          </button>
-          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
-            Kuning
-          </button>
-          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
-            Biru Muda
-          </button>
-          <button onclick="selectColor(this)" class="color-btn border border-slate-300 hover:border-slate-400 bg-white text-slate-700 px-3 py-1.5 rounded-lg font-medium text-[11px]">
-            Hijau
+          <button type="button" onclick="buyNowFromDetail()" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-bold text-xs shadow-md transition">
+            Beli Sekarang
           </button>
         </div>
+
       </div>
 
-      <!-- Jumlah Kuantitas -->
-      <div class="flex items-center gap-4 text-xs pt-1">
-        <span class="text-slate-400 font-semibold w-24 shrink-0">Kuantitas</span>
-        <div class="flex items-center border border-slate-300 rounded-lg overflow-hidden text-xs">
-          <button onclick="changeDetailQty(-1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200">-</button>
-          <input id="detailQtyInput" type="text" value="1" readonly class="w-10 text-center font-bold bg-transparent text-xs">
-          <button onclick="changeDetailQty(1)" class="px-3 py-1 bg-slate-100 font-bold hover:bg-slate-200">+</button>
-        </div>
-      </div>
-
-      <!-- Tombol Aksi Beli / Keranjang -->
-      <div class="pt-3 flex items-center gap-3">
-        <button onclick="addDetailToCart()" class="flex-1 bg-red-50 text-red-600 border border-red-500 hover:bg-red-100 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2">
-          <i class="fa-solid fa-cart-plus text-sm"></i> Masukkan Keranjang
-        </button>
-        <button onclick="buyNowFromDetail()" class="flex-1 bg-red-600 text-white hover:bg-red-700 py-3 rounded-xl font-bold text-xs shadow-md transition">
-          Beli Sekarang
-        </button>
-      </div>
-      </div>
     </div>
 
+  </div>
+</div>
     <!-- PROFIL TOKO DETAIL (SHOPEE STYLE) -->
     <div class="border-t border-slate-200 pt-4 bg-slate-50/50 p-4 rounded-2xl">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
